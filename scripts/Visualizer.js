@@ -2,6 +2,8 @@ class Visualizer {
     constructor(arr) {
         this.arr = arr;
         this.alg = null;
+
+        this.max = Math.max(...this.arr);
     }
 
     useAlgorithm(alg) {
