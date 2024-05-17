@@ -5,6 +5,12 @@ class Visualizer {
 
         this.max = Math.max(...this.arr);
         this.done = false;
+
+        this.started = false;
+    }
+
+    setup() {
+        this.started = true;
     }
 
     useAlgorithm(alg) {

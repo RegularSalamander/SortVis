@@ -7,7 +7,7 @@ function setup() {
     visCanvas = createCanvas(1000, 500);
     visCanvas.parent("visualizer-div");
 
-    arr = Array.from(Array(100).keys());
+    arr = Array.from(Array(1000).keys());
 
     vis = new BarVisualizer(arr);
     vis.useAlgorithm(new Shuffle());
@@ -17,10 +17,16 @@ function setup() {
 function draw() {
     background(0);
 
-    vis.step(1);
+    if(vis.started){
+        vis.step(10);
+    }
     if(vis.done) {
         vis.useAlgorithm(new QuickSort());
     }
 
     vis.draw();
+}
+
+function mousePressed() {
+    vis.setup();
 }
