@@ -17,9 +17,9 @@ function setup() {
 function draw() {
     background(0);
 
-    vis.step(5);
+    vis.step(1);
     if(vis.done) {
-        vis.useAlgorithm(new BubbleSort());
+        vis.useAlgorithm(new QuickSort());
     }
 
     vis.draw();
