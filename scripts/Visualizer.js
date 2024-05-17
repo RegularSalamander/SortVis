@@ -8,10 +8,16 @@ class Visualizer {
 
     useAlgorithm(alg) {
         this.alg = alg;
-        this.alg.useList(alg);
+        this.alg.useList(this.arr);
+    }
+
+    step(iters) {
+        this.alg.step(iters)
     }
 
     draw() {
+        //to be implemented by subclasses
+
         background(0);
         fill(255);
         stroke(0);

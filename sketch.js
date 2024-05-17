@@ -7,14 +7,17 @@ function setup() {
     visCanvas = createCanvas(1000, 500);
     visCanvas.parent("visualizer-div");
 
-    arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    arr = Array.from(Array(100).keys());
 
     vis = new BarVisualizer(arr);
+    vis.useAlgorithm(new Shuffle());
 }
 
 //p5js draw function
 function draw() {
     background(0);
+
+    vis.step(1);
 
     vis.draw();
 }
