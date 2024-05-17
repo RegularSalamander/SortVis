@@ -4,15 +4,20 @@ class Visualizer {
         this.alg = null;
 
         this.max = Math.max(...this.arr);
+        this.done = false;
     }
 
     useAlgorithm(alg) {
         this.alg = alg;
         this.alg.useList(this.arr);
+
+        this.done = false;
     }
 
     step(iters) {
-        this.alg.step(iters)
+        if(this.done) return;
+        
+        this.done = this.alg.step(iters)
     }
 
     draw() {

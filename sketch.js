@@ -17,7 +17,10 @@ function setup() {
 function draw() {
     background(0);
 
-    vis.step(1);
+    vis.step(5);
+    if(vis.done) {
+        vis.useAlgorithm(new BubbleSort());
+    }
 
     vis.draw();
 }
