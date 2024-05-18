@@ -16,6 +16,14 @@ class BarVisualizer extends Visualizer {
         this.osc1.type = 'triangle';
         this.osc2.type = 'triangle';
         this.gain.gain.value = 0.1;
+
+        document.addEventListener("visibilitychange", (event) => {
+            if (document.visibilityState == "visible") {
+                this.gain.gain.exponentialRampToValueAtTime(0.1, 0.1);
+            } else {
+                this.gain.gain.exponentialRampToValueAtTime(0.00001, 0.1);
+            }
+        });
     }
     
     draw() {
@@ -39,11 +47,11 @@ class BarVisualizer extends Visualizer {
         }
 
         for(let i = 0; i < this.alg.values.length-1; i += 2) {
-            this.osc1.frequency.exponentialRampToValueAtTime(
+            this.osc1.frequency.linearRampToValueAtTime(
                 map(this.alg.values[i], 0, this.max, 110, 440),
                 this.context.currentTime + i/60/this.alg.values.length
             );
-            this.osc2.frequency.exponentialRampToValueAtTime(
+            this.osc2.frequency.linearRampToValueAtTime(
                 map(this.alg.values[i+1], 0, this.max, 110, 440),
                 this.context.currentTime + i/60/this.alg.values.length
             );
