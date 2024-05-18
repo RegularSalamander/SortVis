@@ -1,4 +1,10 @@
 class HeapSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Heap Sort";
+    }
+    
     * sort() {
         yield* this.heapify();
 

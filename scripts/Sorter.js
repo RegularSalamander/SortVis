@@ -66,4 +66,15 @@ class Sorter {
     * sort() {
         //to be implemented by subclasses
     }
+
+    writeDetails() {
+        fill(255);
+        noStroke();
+        text(this.name || "(No algorithm)", 10, 25)
+        text("N = " + this.arr.length, 10, 50)
+        text("Comparisons: " + this.compares, 10, 75)
+        text("Reads: " + this.reads, 10, 90)
+        text("Writes: " + this.writes, 10, 105)
+        text("Swaps: " + this.swaps, 10, 120)
+    }
 }

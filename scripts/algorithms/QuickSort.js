@@ -1,4 +1,10 @@
 class QuickSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Quicksort";
+    }
+    
     * sort() {
         yield* this.recurse(0, this.arr.length-1);
     }

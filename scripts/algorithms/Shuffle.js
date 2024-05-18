@@ -1,4 +1,10 @@
 class Shuffle extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Shuffle";
+    }
+    
     * sort() {
         yield;
 

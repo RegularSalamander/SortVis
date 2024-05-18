@@ -1,4 +1,10 @@
 class InsertionSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Insertion Sort";
+    }
+    
     * sort() {
         yield;
 

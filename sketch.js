@@ -12,7 +12,7 @@ function setup() {
     visCanvas = createCanvas(1024, 512);
     visCanvas.parent("visualizer-div");
 
-    arr = Array.from(Array(1000).keys());
+    arr = Array.from(Array(64).keys());
 
     vis = new RainbowBarVisualizer(arr);
     vis.useAlgorithm(new Shuffle());
@@ -56,6 +56,7 @@ function draw() {
     }
 
     vis.draw();
+    vis.alg.writeDetails();
 }
 
 function mousePressed() {

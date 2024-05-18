@@ -1,4 +1,10 @@
 class MergeSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Merge Sort";
+    }
+    
     * sort() {
         yield* this.recurse(0, this.arr.length-1);
     }

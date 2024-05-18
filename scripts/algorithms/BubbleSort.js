@@ -1,4 +1,10 @@
 class BubbleSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Bubble Sort";
+    }
+    
     * sort() {
         yield;
 

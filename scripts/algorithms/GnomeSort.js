@@ -1,4 +1,10 @@
 class GnomeSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Gnome Sort";
+    }
+    
     * sort() {
         let i = 0;
         while(i < this.arr.length-1) {
