@@ -14,22 +14,22 @@ function setup() {
 
     arr = Array.from(Array(1000).keys());
 
-    vis = new BarVisualizer(arr);
+    vis = new RainbowBarVisualizer(arr);
     vis.useAlgorithm(new Shuffle());
 
     algList = [
-        // {n: 64, speed: 1, alg: new Shuffle()},
-        // {n: 64, speed: 2, alg: new BubbleSort()},
-        // {n: 64, speed: 1, alg: new Shuffle()},
-        // {n: 64, speed: 2, alg: new GnomeSort()},
-        // {n: 128, speed: 2, alg: new Shuffle()},
-        // {n: 128, speed: 2, alg: new InsertionSort()},
-        // {n: 256, speed: 4, alg: new Shuffle()},
-        // {n: 256, speed: 2, alg: new QuickSort()},
-        // {n: 256, speed: 4, alg: new Shuffle()},
-        // {n: 256, speed: 2, alg: new MergeSort()},
-        {n: 1024, speed: 4, alg: new Shuffle()},
-        {n: 1024, speed: 10, alg: new HeapSort()}
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new BubbleSort()},
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new GnomeSort()},
+        {n: 128, speed: 2, alg: new Shuffle()},
+        {n: 128, speed: 2, alg: new InsertionSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new QuickSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new MergeSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new HeapSort()}
     ]
     algIterator = algSeries(algList);
 
