@@ -36,14 +36,20 @@ class SoundVisualizer extends Visualizer {
             this.gain.gain.exponentialRampToValueAtTime(0.1, 0.1);
         }
 
-        for(let i = 0; i < this.alg.values.length-1; i += 2) {
+        //if odd number of values, duplicate the last value
+        //with a slight offset to avoid cancelling waves
+        if(this.alg.values.length % 2 == 1) {
+            this.alg.values.push(this.alg.values[this.alg.values.length-1] - 10);
+        }
+
+        for(let i = 0; i < this.alg.values.length; i += 2) {
             this.osc1.frequency.linearRampToValueAtTime(
                 map(this.alg.values[i], 0, this.max, 110, 440),
-                this.context.currentTime + i/60/this.alg.values.length
+                this.context.currentTime + 0
             );
             this.osc2.frequency.linearRampToValueAtTime(
                 map(this.alg.values[i+1], 0, this.max, 110, 440),
-                this.context.currentTime + i/60/this.alg.values.length
+                this.context.currentTime + 0
             );
         }
     }
