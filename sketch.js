@@ -9,7 +9,7 @@ function setup() {
 
     arr = Array.from(Array(1000).keys());
 
-    vis = new BarVisualizer(arr);
+    vis = new RainbowCircleVisualizer(arr);
     vis.useAlgorithm(new Shuffle());
 }
 
