@@ -38,14 +38,14 @@ class BarVisualizer extends Visualizer {
             this.gain.gain.exponentialRampToValueAtTime(0.1, 0.1);
         }
 
-        for(let i = 0; i < this.alg.values.length; i += 2) {
+        for(let i = 0; i < this.alg.values.length-1; i += 2) {
             this.osc1.frequency.exponentialRampToValueAtTime(
                 map(this.alg.values[i], 0, this.max, 110, 440),
-                this.context.currentTime + 0
+                this.context.currentTime + i/60/this.alg.values.length
             );
             this.osc2.frequency.exponentialRampToValueAtTime(
                 map(this.alg.values[i+1], 0, this.max, 110, 440),
-                this.context.currentTime + 0
+                this.context.currentTime + i/60/this.alg.values.length
             );
         }
     }

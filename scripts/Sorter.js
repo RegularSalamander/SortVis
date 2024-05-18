@@ -37,7 +37,7 @@ class Sorter {
 
     doSwap(idx1, idx2) {
         this.accessing.push(idx1, idx2);
-        this.values.push(arr[idx1], arr[idx2]);
+        this.values.push(this.arr[idx1], this.arr[idx2]);
         this.reads += 2;
         this.writes += 2;
         this.swaps++;
@@ -45,6 +45,14 @@ class Sorter {
         let temp = this.arr[idx1];
         this.arr[idx1] = this.arr[idx2];
         this.arr[idx2] = temp;
+    }
+
+    doRead(idx) {
+        this.accessing.push(idx);
+        this.values.push(this.arr[idx]);
+        this.reads++;
+
+        return this.arr[idx];
     }
 
     doWrite(idx, val) {

@@ -21,7 +21,7 @@ function draw() {
         vis.step(10);
     }
     if(vis.done) {
-        vis.useAlgorithm(new QuickSort());
+        vis.useAlgorithm(new MergeSort());
     }
 
     vis.draw();
