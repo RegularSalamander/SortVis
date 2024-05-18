@@ -13,6 +13,11 @@ class Visualizer {
         this.started = true;
     }
 
+    useList(arr) {
+        this.arr = arr;
+        this.max = Math.max(...this.arr);
+    }
+
     useAlgorithm(alg) {
         this.alg = alg;
         this.alg.useList(this.arr);
