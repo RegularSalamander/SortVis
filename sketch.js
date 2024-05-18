@@ -9,7 +9,7 @@ let waiting = false;
 
 //p5js setup function
 function setup() {
-    visCanvas = createCanvas(1000, 500);
+    visCanvas = createCanvas(1024, 512);
     visCanvas.parent("visualizer-div");
 
     arr = Array.from(Array(1000).keys());
@@ -18,14 +18,14 @@ function setup() {
     vis.useAlgorithm(new Shuffle());
 
     algList = [
-        {n: 50, speed: 1, alg: new Shuffle()},
-        {n: 50, speed: 1, alg: new BubbleSort()},
-        {n: 100, speed: 2, alg: new Shuffle()},
-        {n: 100, speed: 1, alg: new InsertionSort()},
-        {n: 200, speed: 4, alg: new Shuffle()},
-        {n: 200, speed: 1, alg: new QuickSort()},
-        {n: 200, speed: 4, alg: new Shuffle()},
-        {n: 200, speed: 1, alg: new MergeSort()}
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 1, alg: new BubbleSort()},
+        {n: 128, speed: 2, alg: new Shuffle()},
+        {n: 128, speed: 1, alg: new InsertionSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 1, alg: new QuickSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 1, alg: new MergeSort()}
     ]
     algIterator = algSeries(algList);
 
