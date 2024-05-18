@@ -27,11 +27,11 @@ class HeapSort extends Sorter {
     * siftDown(root, end) {
         while(this.iLeftChild(root) < end) {
             let child = this.iLeftChild(root);
-            if(child+1 < end && this.arr[child] < this.arr[child+1]) {
+            if(child+1 < end && this.doRead(child) < this.doRead(child+1)) {
                 child++;
             }
 
-            if(this.arr[root] < this.arr[child]) {
+            if(this.doRead(root) < this.doRead(child)) {
                 this.doSwap(root, child);
                 yield;
                 root = child;
