@@ -43,13 +43,13 @@ class SoundVisualizer extends Visualizer {
         }
 
         for(let i = 0; i < this.alg.values.length; i += 2) {
-            this.osc1.frequency.linearRampToValueAtTime(
+            this.osc1.frequency.setValueAtTime(
                 map(this.alg.values[i], 0, this.max, 110, 440),
-                this.context.currentTime + 0
+                this.context.currentTime + i/60/this.alg.values.length
             );
-            this.osc2.frequency.linearRampToValueAtTime(
+            this.osc2.frequency.setValueAtTime(
                 map(this.alg.values[i+1], 0, this.max, 110, 440),
-                this.context.currentTime + 0
+                this.context.currentTime + i/60/this.alg.values.length
             );
         }
     }
