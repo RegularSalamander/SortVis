@@ -4,10 +4,8 @@ class BubbleSort extends Sorter {
 
         this.name = "Bubble Sort";
     }
-    
-    * sort() {
-        yield;
 
+    * sort() {
         for(let i = this.arr.length-1; i >= 1; i--) {
             for(let j = 0; j < i; j++) {
                 if(this.doCompare(j, j+1)) {
