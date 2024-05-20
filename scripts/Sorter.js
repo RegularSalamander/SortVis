@@ -11,6 +11,9 @@ class Sorter {
         this.arr = null;
 
         this.iterator = this.sort();
+
+        let nf = new Intl.NumberFormat();
+        this.nf = nf.format;
     }
 
     useList(arr) {
@@ -73,12 +76,12 @@ class Sorter {
         this.drawInfoList([
             this.name || `(No algorithm)`,
             null,
-            `N = ` + this.arr.length,
+            `N = ${this.nf(this.arr.length)}`,
             null,
-            `Comparisons: ${this.compares}`,
-            `Reads: ${this.reads}`,
-            `Writes: ${this.writes}`,
-            `Swaps: ${this.swaps}`
+            `Comparisons: ${this.nf(this.compares)}`,
+            `Reads: ${this.nf(this.reads)}`,
+            `Writes: ${this.nf(this.writes)}`,
+            `Swaps: ${this.nf(this.swaps)}`
         ]);
     }
 
@@ -89,13 +92,14 @@ class Sorter {
     drawInfoList(list) {
         fill(255);
         noStroke();
-        let y = 25;
+        textSize(32);
+        let y = 50;
         for(let i in list) {
             if(list[i]) {
-                text(list[i], 10, y);
-                y += 15;
+                text(list[i], 20, y);
+                y += 35;
             } else {
-                y += 10;
+                y += 20;
             }
         }
     }

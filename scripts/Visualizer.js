@@ -33,9 +33,13 @@ class Visualizer {
     }
 
     step(iters) {
-        if(this.done) return;
+        if(this.done) {
+            this.alg.accessing.clear();
+            return;
+        }
         
         this.done = this.alg.step(iters)
+        if(this.done) this.alg.accessing.clear();
     }
 
     draw() {

@@ -18,12 +18,12 @@ class QuickSort extends Sorter {
                 `Pivot: ${this.pivotStyle}`,
                 `Insertion Sort Cutoff: ${this.insertionCutoff}`,
                 null,
-                "N = " + this.arr.length,
+                `N = ${this.nf(this.arr.length)}`,
                 null,
-                "Comparisons: " + this.compares,
-                "Reads: " + this.reads,
-                "Writes: " + this.writes,
-                "Swaps: " + this.swaps
+                `Comparisons: ${this.nf(this.compares)}`,
+                `Reads: ${this.nf(this.reads)}`,
+                `Writes: ${this.nf(this.writes)}`,
+                `Swaps: ${this.nf(this.swaps)}`
             ]);
         } else {
             this.drawInfoList([
@@ -31,12 +31,12 @@ class QuickSort extends Sorter {
                 `${this.partitionType} Pointers`,
                 `Pivot: ${this.pivotStyle}`,
                 null,
-                "N = " + this.arr.length,
+                `N = ${this.nf(this.arr.length)}`,
                 null,
-                "Comparisons: " + this.compares,
-                "Reads: " + this.reads,
-                "Writes: " + this.writes,
-                "Swaps: " + this.swaps
+                `Comparisons: ${this.nf(this.compares)}`,
+                `Reads: ${this.nf(this.reads)}`,
+                `Writes: ${this.nf(this.writes)}`,
+                `Swaps: ${this.nf(this.swaps)}`
             ]);
         }
     }

@@ -19,45 +19,58 @@ class SoundVisualizer extends Visualizer {
 
         document.addEventListener("visibilitychange", (event) => {
             if (document.visibilityState == "visible") {
-                this.gain.gain.exponentialRampToValueAtTime(0.1, 0.1);
+                this.gain.gain.setTargetAtTime(0.1, this.context.currentTime, 0.04);
             } else {
-                this.gain.gain.exponentialRampToValueAtTime(0.00001, 0.1);
+                this.gain.gain.setTargetAtTime(0.00001, this.context.currentTime, 0.04);
             }
         });
     }
 
+    useAlgorithm(alg) {
+        super.useAlgorithm(alg);
+
+        if(this.started){
+            this.gain.gain.setTargetAtTime(0.1, this.context.currentTime, 0.04);
+        }
+    }
+
     step(iters) {
+        let wasDone = this.done; 
+
         super.step(iters)
 
-        if(this.done) {
-            this.gain.gain.exponentialRampToValueAtTime(0.00001, 0.1);
+        if(!wasDone && this.done) {
+            this.gain.gain.setTargetAtTime(0.00001, this.context.currentTime, 0.04);
             return;
-        } else {
-            this.gain.gain.exponentialRampToValueAtTime(0.1, 0.1);
         }
 
         //if odd number of values, duplicate the last value
-        //with a slight offset to avoid cancelling waves
         if(this.alg.values.length % 2 == 1) {
-            this.alg.values.push(this.alg.values[this.alg.values.length-1] - 10);
+            this.alg.values.push(this.alg.values[this.alg.values.length-1]);
         }
 
         if(fullSound) {
             //play each frequency sequentially
             for(let i = 0; i < this.alg.values.length; i += 2) {
-                this.osc1.frequency.setValueAtTime(
+                this.osc1.frequency.linearRampToValueAtTime(
                     map(this.alg.values[i], 0, this.max, 110, 440),
                     this.context.currentTime + i/60/this.alg.values.length
                 );
-                this.osc2.frequency.setValueAtTime(
-                    map(this.alg.values[i+1], 0, this.max, 110, 440),
+                this.osc2.frequency.linearRampToValueAtTime(
+                    map(this.alg.values[i+1], 0, this.max, 110, 440) + 10, //slight offset of 10 Hz
                     this.context.currentTime + i/60/this.alg.values.length
                 );
             }
         } else {
             //play only the last two frequencies
-            this.osc1.frequency.value = map(this.alg.values[this.alg.values.length-2], 0, this.max, 110, 440);
-            this.osc2.frequency.value = map(this.alg.values[this.alg.values.length-1], 0, this.max, 110, 440);
+            this.osc1.frequency.linearRampToValueAtTime(
+                map(this.alg.values[this.alg.values.length-2], 0, this.max, 110, 440),
+                this.context.currentTime + 1/60
+            );
+            this.osc2.frequency.linearRampToValueAtTime(
+                map(this.alg.values[this.alg.values.length-1], 0, this.max, 110, 440),
+                this.context.currentTime + 1/60
+            );
         }
     }
 }

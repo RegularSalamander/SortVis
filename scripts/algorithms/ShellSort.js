@@ -13,12 +13,12 @@ class ShellSort extends Sorter {
             this.name || "(No algorithm)",
             `Shrink factor: ${this.shrink}`,
             null,
-            "N = " + this.arr.length,
+            `N = ${this.nf(this.arr.length)}`,
             null,
-            "Comparisons: " + this.compares,
-            "Reads: " + this.reads,
-            "Writes: " + this.writes,
-            "Swaps: " + this.swaps
+            `Comparisons: ${this.nf(this.compares)}`,
+            `Reads: ${this.nf(this.reads)}`,
+            `Writes: ${this.nf(this.writes)}`,
+            `Swaps: ${this.nf(this.swaps)}`
         ]);
     }
 
