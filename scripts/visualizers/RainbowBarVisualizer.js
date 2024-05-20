@@ -5,7 +5,7 @@ class RainbowBarVisualizer extends SoundVisualizer {
 
         colorMode(HSB, 255, 255, 255);
         for(let i = 0; i < this.arr.length; i++) {
-            if(this.alg.accessing.has(i)) fill(0, 0, 255);
+            if(flashing && this.alg.accessing.has(i)) fill(0, 0, 255);
             else fill(this.arr[i]/this.max*255, 255, 255);
             rect(i*width/this.arr.length, height*(1-this.arr[i]/this.max), width/this.arr.length, height*this.arr[i]/this.max);
         }

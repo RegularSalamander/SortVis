@@ -4,7 +4,6 @@ let visCanvas;
 let vis;
 let arr;
 
-let algIterator;
 let waiting = false;
 
 let speed = 0.1;
@@ -12,9 +11,14 @@ let timer = 0;
 
 let img;
 
+let imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png"
+let flashing = false;
+let fullSound = false;
+let algIterator;
+
 function preload() {
-    // img = loadImage("https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png");
-    img = loadImage("https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png")
+    //load image, default to Lena if no address is specified
+    img = loadImage(imgAddress || "https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png");
 }
 
 //p5js setup function

@@ -36,7 +36,7 @@ class ImageVisualizer extends SoundVisualizer {
         noStroke();
 
         for(let i in this.arr) {
-            if(this.alg.accessing.has(parseInt(i))) {
+            if(flashing && this.alg.accessing.has(parseInt(i))) {
                 this.img.pixels[i*4] = 255;
                 this.img.pixels[i*4 + 1] = 255;
                 this.img.pixels[i*4 + 2] = 255;
