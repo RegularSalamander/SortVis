@@ -19,7 +19,7 @@ function preload() {
 
 //p5js setup function
 function setup() {
-    visCanvas = createCanvas(1024, 512);
+    visCanvas = createCanvas(1920, 1080);
     visCanvas.parent("visualizer-div");
 
     arr = Array.from(Array(256).keys());
