@@ -28,7 +28,7 @@ class Sorter {
 
     doCompare(idx1, idx2) {
         this.accessing.push(idx1, idx2);
-        this.values.push(arr[idx1], arr[idx2]);
+        this.values.push(this.arr[idx1], this.arr[idx2]);
         this.compares++;
         this.reads += 2;
 
