@@ -4,7 +4,6 @@ let visCanvas;
 let vis;
 let arr;
 
-let algList;
 let algIterator;
 let waiting = false;
 
@@ -29,44 +28,45 @@ function setup() {
     vis.useList(arr);
     vis.useAlgorithm(new Shuffle());
 
-    algList = [
+    algIterator = algSeries([
         //bubble sorts
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 10, alg: new BubbleSort()},
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 16, alg: new CocktailSort()},
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 16, alg: new OddEvenSort()},
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new CombSort({shrink: 1.3})},
+        {n: Math.pow(2, 11), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 500, alg: new BubbleSort()},
+        {n: Math.pow(2, 11), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 500, alg: new CocktailSort()},
+        {n: Math.pow(2, 11), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 500, alg: new OddEvenSort()},
+        {n: Math.pow(2, 12), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 12), speed: 500, alg: new CombSort({shrink: 1.3})},
 
         //insertion sorts
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 10000, alg: new InsertionSort()},
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 16, alg: new GnomeSort()},
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new ShellSort({shrink: 2.5})},
+        {n: Math.pow(2, 12), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 12), speed: 500, alg: new InsertionSort()},
+        {n: Math.pow(2, 11), speed: 50, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 1000, alg: new GnomeSort()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new ShellSort({shrink: 2.5})},
 
         //selection sorts
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 16, alg: new SelectionSort()},
-        // {n: 256, speed: 1000, alg: new Shuffle()},
-        // {n: 256, speed: 16, alg: new DoubleSelectionSort()},
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new HeapSort()},
+        {n: Math.pow(2, 11), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 1000, alg: new SelectionSort()},
+        {n: Math.pow(2, 11), speed: 100, alg: new Shuffle()},
+        {n: Math.pow(2, 11), speed: 1000, alg: new DoubleSelectionSort()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new HeapSort()},
         
-        // //quicksorts
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new QuickSort({partitionType:"LR"})},
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new QuickSort({partitionType:"LL"})},
+        //quicksorts
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new QuickSort({partitionType:"LR"})},
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new QuickSort({partitionType:"LL"})},
 
         //mergesorts
-        {n: 2048, speed: 1000, alg: new Shuffle()},
-        {n: 2048, speed: 1000, alg: new MergeSort()}
-    ]
-    algIterator = algSeries(algList);
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new MergeSort()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new Shuffle()},
+        {n: Math.pow(2, 17), speed: 1000, alg: new IterativeMergeSort()},
+    ]);
 
     algIterator.next()
 }
