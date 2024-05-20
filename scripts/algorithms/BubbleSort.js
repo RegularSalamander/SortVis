@@ -6,13 +6,19 @@ class BubbleSort extends Sorter {
     }
 
     * sort() {
-        for(let i = this.arr.length-1; i >= 1; i--) {
-            for(let j = 0; j < i; j++) {
-                if(this.doCompare(j, j+1)) {
-                    this.doSwap(j, j+1);
+        let swapped = true;
+        let end = this.arr.length - 1;
+        while(end > 0 && swapped) {
+            swapped = false;
+            for(let i = 0; i < end; i++) {
+                if(this.doCompare(i, i+1)) {
+                    this.doSwap(i, i+1);
+                    swapped = true;
                 }
                 yield;
             }
+
+            end--;
         }
     }
 }
