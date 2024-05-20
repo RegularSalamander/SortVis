@@ -5,7 +5,7 @@ class Sorter {
         this.compares = 0;
         this.swaps = 0;
 
-        this.accessing = [];
+        this.accessing = new Set();
         this.values = [];
 
         this.arr = null;
@@ -18,7 +18,7 @@ class Sorter {
     }
 
     step(iters) {
-        this.accessing = [];
+        this.accessing.clear();
         this.values = [];
         for(let i = 0; i < iters; i++)
             if(this.iterator.next().done)
@@ -27,7 +27,8 @@ class Sorter {
     }
 
     doCompare(idx1, idx2) {
-        this.accessing.push(idx1, idx2);
+        this.accessing.add(idx1);
+        this.accessing.add(idx2);
         this.values.push(this.arr[idx1], this.arr[idx2]);
         this.compares++;
         this.reads += 2;
@@ -36,7 +37,8 @@ class Sorter {
     }
 
     doSwap(idx1, idx2) {
-        this.accessing.push(idx1, idx2);
+        this.accessing.add(idx1);
+        this.accessing.add(idx2);
         this.values.push(this.arr[idx1], this.arr[idx2]);
         this.reads += 2;
         this.writes += 2;
@@ -48,7 +50,7 @@ class Sorter {
     }
 
     doRead(idx) {
-        this.accessing.push(idx);
+        this.accessing.add(idx);
         this.values.push(this.arr[idx]);
         this.reads++;
 
@@ -56,7 +58,7 @@ class Sorter {
     }
 
     doWrite(idx, val) {
-        this.accessing.push(idx);
+        this.accessing.add(idx);
         this.values.push(val);
         this.writes++;
 

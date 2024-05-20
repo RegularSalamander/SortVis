@@ -30,10 +30,17 @@ class ImageVisualizer extends SoundVisualizer {
         noStroke();
 
         for(let i in this.arr) {
-            this.img.pixels[i*4] = this.pixelLookup[this.arr[i]*4];
-            this.img.pixels[i*4 + 1] = this.pixelLookup[this.arr[i]*4 + 1];
-            this.img.pixels[i*4 + 2] = this.pixelLookup[this.arr[i]*4 + 2];
-            this.img.pixels[i*4 + 3] = this.pixelLookup[this.arr[i]*4 + 3];
+            if(this.alg.accessing.has(parseInt(i))) {
+                this.img.pixels[i*4] = 255;
+                this.img.pixels[i*4 + 1] = 255;
+                this.img.pixels[i*4 + 2] = 255;
+                this.img.pixels[i*4 + 3] = 255;
+            } else {
+                this.img.pixels[i*4] = this.pixelLookup[this.arr[i]*4];
+                this.img.pixels[i*4 + 1] = this.pixelLookup[this.arr[i]*4 + 1];
+                this.img.pixels[i*4 + 2] = this.pixelLookup[this.arr[i]*4 + 2];
+                this.img.pixels[i*4 + 3] = this.pixelLookup[this.arr[i]*4 + 3];
+            }
         }
         this.img.updatePixels();
 
