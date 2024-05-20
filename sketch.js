@@ -25,6 +25,10 @@ function setup() {
         {n: 64, speed: 2, alg: new BubbleSort()},
         {n: 64, speed: 1, alg: new Shuffle()},
         {n: 64, speed: 2, alg: new CocktailSort()},
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new OddEvenSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new CombSort({shrink: 1.3})},
 
         //insertion sorts
         {n: 64, speed: 2, alg: new Shuffle()},
@@ -58,10 +62,10 @@ function draw() {
     if(vis.started) {
         timer += speed;
         if(timer >= 1){
-        vis.step(Math.floor(timer));
+            vis.step(Math.floor(timer));
             timer -= Math.floor(timer);
+        }
     }
-}
     
     if(vis.done && !waiting) {
         setTimeout(
