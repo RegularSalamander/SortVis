@@ -4,7 +4,6 @@ class ShellSort extends Sorter {
 
         if(!opts) opts = {};
         this.shrink = opts.shrink || 2;
-        this.gap;
 
         this.name = `Shell Sort`;
     }

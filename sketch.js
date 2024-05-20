@@ -41,6 +41,8 @@ function setup() {
         //selection sorts
         {n: 64, speed: 1, alg: new Shuffle()},
         {n: 64, speed: 2, alg: new SelectionSort()},
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new DoubleSelectionSort()},
         {n: 256, speed: 4, alg: new Shuffle()},
         {n: 256, speed: 2, alg: new HeapSort()},
         
