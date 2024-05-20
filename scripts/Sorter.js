@@ -67,14 +67,34 @@ class Sorter {
         //to be implemented by subclasses
     }
 
-    writeDetails() {
+    writeInfo() {
+        this.drawInfoList([
+            this.name || `(No algorithm)`,
+            null,
+            `N = ` + this.arr.length,
+            null,
+            `Comparisons: ${this.compares}`,
+            `Reads: ${this.reads}`,
+            `Writes: ${this.writes}`,
+            `Swaps: ${this.swaps}`
+        ]);
+    }
+
+    /*
+    Takes in a list of strings and writes each one to the screen as one line.
+    null values are treated as small gaps between lines.
+    */
+    drawInfoList(list) {
         fill(255);
         noStroke();
-        text(this.name || "(No algorithm)", 10, 25)
-        text("N = " + this.arr.length, 10, 50)
-        text("Comparisons: " + this.compares, 10, 75)
-        text("Reads: " + this.reads, 10, 90)
-        text("Writes: " + this.writes, 10, 105)
-        text("Swaps: " + this.swaps, 10, 120)
+        let y = 25;
+        for(let i in list) {
+            if(list[i]) {
+                text(list[i], 10, y);
+                y += 15;
+            } else {
+                y += 10;
+            }
+        }
     }
 }

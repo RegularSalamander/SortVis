@@ -76,7 +76,7 @@ function draw() {
     }
 
     vis.draw();
-    vis.alg.writeDetails();
+    vis.alg.writeInfo();
 }
 
 function mousePressed() {
