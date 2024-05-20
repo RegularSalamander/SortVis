@@ -19,6 +19,10 @@ class MergeSort extends Sorter {
         yield* this.recurse(mid+1, end);
 
         //merge
+        yield* this.merge(start, mid, end);
+    }
+
+    * merge(start, mid, end) {
         let startpointer = start;
         let midpointer = mid+1;
         let mergeArray = [];
