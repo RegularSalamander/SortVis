@@ -3,9 +3,11 @@ let vis;
 let arr;
 
 let algList;
-let speed = 1;
 let algIterator;
 let waiting = false;
+
+let speed = 0.1;
+let timer = 0;
 
 //p5js setup function
 function setup() {
@@ -53,9 +55,14 @@ function setup() {
 function draw() {
     background(0);
 
-    if(vis.started){
-        vis.step(speed);
+    if(vis.started) {
+        timer += speed;
+        if(timer >= 1){
+        vis.step(Math.floor(timer));
+            timer -= Math.floor(timer);
     }
+}
+    
     if(vis.done && !waiting) {
         setTimeout(
             () => {
