@@ -48,7 +48,9 @@ function setup() {
         
         //quicksorts
         {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new QuickSort()},
+        {n: 256, speed: 2, alg: new QuickSort({partitionType:"LR"})},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new QuickSort({partitionType:"LL"})},
 
         //mergesorts
         {n: 256, speed: 4, alg: new Shuffle()},

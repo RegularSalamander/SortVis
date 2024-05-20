@@ -1,16 +1,57 @@
 class QuickSort extends Sorter {
-    constructor() {
+    constructor(opts) {
         super();
+
+        if(!opts) opts = {};
+        this.partitionType = opts.partitionType || "LL";
+        this.pivotStyle = opts.pivotStyle || "Last Element";
+        this.insertionCutoff = opts.insertionCutoff || 0;
 
         this.name = "Quicksort";
     }
-    
+
+    writeInfo() {
+        if(this.insertionCutoff) {
+            this.drawInfoList([
+                this.name || "(No algorithm)",
+                `${this.partitionType} Pointers`,
+                `Pivot: ${this.pivotStyle}`,
+                `Insertion Sort Cutoff: ${this.insertionCutoff}`,
+                null,
+                "N = " + this.arr.length,
+                null,
+                "Comparisons: " + this.compares,
+                "Reads: " + this.reads,
+                "Writes: " + this.writes,
+                "Swaps: " + this.swaps
+            ]);
+        } else {
+            this.drawInfoList([
+                this.name || "(No algorithm)",
+                `${this.partitionType} Pointers`,
+                `Pivot: ${this.pivotStyle}`,
+                null,
+                "N = " + this.arr.length,
+                null,
+                "Comparisons: " + this.compares,
+                "Reads: " + this.reads,
+                "Writes: " + this.writes,
+                "Swaps: " + this.swaps
+            ]);
+        }
+    }
+
     * sort() {
         yield* this.recurse(0, this.arr.length-1);
     }
 
     * recurse(start, end) {
         if(start >= end) return;
+
+        if(end - start < this.insertionCutoff){
+            yield* this.insertionSort(start, end);
+            return;
+        }
         
         //chooses a pivot and moves it to the end
         yield* this.choosePivot(start, end);
@@ -19,35 +60,81 @@ class QuickSort extends Sorter {
         yield* this.partition(start, end)
     }
 
+    //chooses a pivot and swaps it with end
     * choosePivot(start, end) {
-        //get partition as median of three and move to end
-        let mid = Math.floor((start+end)/2);
-        if(this.doCompare(start, mid)) this.doSwap(start, mid);
-        yield;
-        if(this.doCompare(mid, end)) this.doSwap(mid, end);
-        yield;
-        if(this.doCompare(start, mid)) this.doSwap(start, mid);
-        yield;
+        if(this.pivotStyle == "Last Element") return;
 
-        this.doSwap(mid, end);
-        yield;
+        if(this.pivotStyle == "Median of Three") {
+            let mid = Math.floor((start+end)/2);
+            if(this.doCompare(start, mid)) this.doSwap(start, mid);
+            yield;
+            if(this.doCompare(mid, end)) this.doSwap(mid, end);
+            yield;
+            if(this.doCompare(start, mid)) this.doSwap(start, mid);
+            yield;
+
+            this.doSwap(mid, end);
+            yield;
+        }
     }
 
     * partition(start, end) {
-        let i = start;
-        for(let j = start; j < end; j++) {
-            if(this.doCompare(end, j)) {
-                this.doSwap(i, j);
-                i++;
+
+        if(this.partitionType == "LL") {
+            let i = start;
+            let j = start;
+            while(j < end) {
+                if(this.doCompare(end, j)) {
+                    this.doSwap(i, j);
+                    i++;
+                }
+                j++;
+
+                yield;
+            }
+
+            this.doSwap(i, end);
+            yield;
+
+            //recurse
+            yield* this.recurse(start, i-1);
+            yield* this.recurse(i+1, end);
+        } else if(this.partitionType == "LR") {
+            let i = start;
+            let j = end - 1;
+            while(i < j) {
+                if(this.doCompare(end, j)) {
+                    this.doSwap(i, j);
+                    i++;
+                } else {
+                    j--;
+                }
+
+                yield;
+            }
+
+            if(this.doCompare(end, i)){
+                i++
+            }
+            this.doSwap(i, end);
+
+            yield;
+
+            //recurse
+            yield* this.recurse(start, i-1);
+            yield* this.recurse(i+1, end);
+        }
+    }
+
+    * insertionSort(start, end) {
+        for(let i = start+1; i <= end; i++) {
+            let j = i;
+            while(j > start && this.doCompare(j-1, j)) {
+                this.doSwap(j, j-1);
+                j--;
+                yield;
             }
             yield;
         }
-
-        this.doSwap(i, end);
-        yield;
-
-        //recurse
-        yield* this.recurse(start, i-1);
-        yield* this.recurse(i+1, end);
     }
 }
