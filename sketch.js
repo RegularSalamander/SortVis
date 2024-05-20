@@ -14,47 +14,48 @@ function setup() {
     visCanvas = createCanvas(1024, 512);
     visCanvas.parent("visualizer-div");
 
-    arr = Array.from(Array(64).keys());
+    arr = Array.from(Array(256).keys());
 
-    vis = new RainbowBarVisualizer(arr);
+    vis = new ScatterVisualizer();
+    vis.useList(arr);
     vis.useAlgorithm(new Shuffle());
 
     algList = [
         //bubble sorts
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new BubbleSort()},
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new CocktailSort()},
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new OddEvenSort()},
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new CombSort({shrink: 1.3})},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new BubbleSort()},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new CocktailSort()},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new OddEvenSort()},
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new CombSort({shrink: 1.3})},
 
         //insertion sorts
-        {n: 64, speed: 2, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new InsertionSort()},
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new GnomeSort()},
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new ShellSort({shrink: 2.5})},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new InsertionSort()},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new GnomeSort()},
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new ShellSort({shrink: 2.5})},
 
         //selection sorts
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new SelectionSort()},
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new DoubleSelectionSort()},
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new HeapSort()},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new SelectionSort()},
+        {n: 256, speed: 2, alg: new Shuffle()},
+        {n: 256, speed: 16, alg: new DoubleSelectionSort()},
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new HeapSort()},
         
         //quicksorts
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new QuickSort({partitionType:"LR"})},
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new QuickSort({partitionType:"LL"})},
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new QuickSort({partitionType:"LR"})},
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new QuickSort({partitionType:"LL"})},
 
         //mergesorts
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new MergeSort()}
+        {n: 2048, speed: 16, alg: new Shuffle()},
+        {n: 2048, speed: 16, alg: new MergeSort()}
     ]
     algIterator = algSeries(algList);
 
@@ -85,6 +86,9 @@ function draw() {
 
     vis.draw();
     vis.alg.writeInfo();
+
+    if(frameCount % 60 == 0)
+        console.log(frameRate())
 }
 
 function mousePressed() {
@@ -93,7 +97,6 @@ function mousePressed() {
 
 function* algSeries(list) {
     for(let i in list) {
-        console.log(i);
         if(list[i].n != vis.arr.length) {
             arr = Array.from(Array(list[i].n).keys());
             vis.useList(arr);

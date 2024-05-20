@@ -1,9 +1,9 @@
 class Visualizer {
-    constructor(arr) {
-        this.arr = arr;
+    constructor() {
+        this.arr = null;
         this.alg = null;
 
-        this.max = Math.max(...this.arr);
+        this.max = 0;
         this.done = false;
 
         this.started = false;
@@ -15,7 +15,14 @@ class Visualizer {
 
     useList(arr) {
         this.arr = arr;
-        this.max = Math.max(...this.arr);
+
+        //exceeds maximum stack size with very large lists
+        // this.max = Math.max(...this.arr);
+
+        this.max = this.arr[0];
+        for(let i in this.arr) {
+            if(this.arr[i] > this.max) this.max = this.arr[i]
+        }
     }
 
     useAlgorithm(alg) {
