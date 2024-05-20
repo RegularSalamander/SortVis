@@ -35,6 +35,8 @@ function setup() {
         {n: 64, speed: 2, alg: new InsertionSort()},
         {n: 64, speed: 1, alg: new Shuffle()},
         {n: 64, speed: 2, alg: new GnomeSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new ShellSort({shrink: 2.5})},
 
         //selection sorts
         {n: 64, speed: 1, alg: new Shuffle()},
@@ -57,8 +59,6 @@ function setup() {
 
 //p5js draw function
 function draw() {
-    background(0);
-
     if(vis.started) {
         timer += speed;
         if(timer >= 1){

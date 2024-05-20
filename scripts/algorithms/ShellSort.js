@@ -1,13 +1,14 @@
-class CombSort extends Sorter {
+class ShellSort extends Sorter {
     constructor(opts) {
         super();
 
         if(!opts) opts = {};
-        this.shrink = opts.shrink || 1.3;
+        this.shrink = opts.shrink || 2;
+        this.gap;
 
-        this.name = `Comb Sort`;
+        this.name = `Shell Sort`;
     }
-
+    
     writeInfo() {
         this.drawInfoList([
             this.name || "(No algorithm)",
@@ -23,25 +24,22 @@ class CombSort extends Sorter {
     }
 
     * sort() {
-        let swapped = true;
+        yield;
+
         let gap = this.arr.length - 1;
 
-        while(gap > 1 || swapped) {
+        while(gap > 1) {
             gap = Math.max(Math.floor(gap/this.shrink), 1);
 
-            // "rule of 11"
-            //if(gap == 9 || gap == 10) gap = 11;
-
-            swapped = false;
-            for(let i = 0; i + gap < this.arr.length; i += 1) {
-                if(this.doCompare(i, i+gap)) {
-                    this.doSwap(i, i+gap);
-                    swapped = true;
+            for(let i = gap; i < this.arr.length; i++) {
+                let j = i;
+                while(j >= gap && this.doCompare(j-gap, j)) {
+                    this.doSwap(j, j-gap);
+                    j -= gap;
+                    yield;
                 }
                 yield;
             }
-
-
         }
     }
 }
