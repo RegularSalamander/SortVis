@@ -18,20 +18,31 @@ function setup() {
     vis.useAlgorithm(new Shuffle());
 
     algList = [
+        //bubble sorts
         {n: 64, speed: 1, alg: new Shuffle()},
         {n: 64, speed: 2, alg: new BubbleSort()},
         {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new SelectionSort()},
-        {n: 64, speed: 1, alg: new Shuffle()},
-        {n: 64, speed: 2, alg: new GnomeSort()},
+        {n: 64, speed: 2, alg: new CocktailSort()},
+
+        //insertion sorts
         {n: 64, speed: 2, alg: new Shuffle()},
         {n: 64, speed: 2, alg: new InsertionSort()},
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new GnomeSort()},
+
+        //selection sorts
+        {n: 64, speed: 1, alg: new Shuffle()},
+        {n: 64, speed: 2, alg: new SelectionSort()},
+        {n: 256, speed: 4, alg: new Shuffle()},
+        {n: 256, speed: 2, alg: new HeapSort()},
+        
+        //quicksorts
         {n: 256, speed: 4, alg: new Shuffle()},
         {n: 256, speed: 2, alg: new QuickSort()},
+
+        //mergesorts
         {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new MergeSort()},
-        {n: 256, speed: 4, alg: new Shuffle()},
-        {n: 256, speed: 2, alg: new HeapSort()}
+        {n: 256, speed: 2, alg: new MergeSort()}
     ]
     algIterator = algSeries(algList);
 
