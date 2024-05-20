@@ -42,15 +42,17 @@ class SoundVisualizer extends Visualizer {
             this.alg.values.push(this.alg.values[this.alg.values.length-1] - 10);
         }
 
-        for(let i = 0; i < this.alg.values.length; i += 2) {
-            this.osc1.frequency.setValueAtTime(
-                map(this.alg.values[i], 0, this.max, 110, 440),
-                this.context.currentTime + i/60/this.alg.values.length
-            );
-            this.osc2.frequency.setValueAtTime(
-                map(this.alg.values[i+1], 0, this.max, 110, 440),
-                this.context.currentTime + i/60/this.alg.values.length
-            );
-        }
+        // for(let i = 0; i < this.alg.values.length; i += 2) {
+        //     this.osc1.frequency.setValueAtTime(
+        //         map(this.alg.values[i], 0, this.max, 110, 440),
+        //         this.context.currentTime + i/60/this.alg.values.length
+        //     );
+        //     this.osc2.frequency.setValueAtTime(
+        //         map(this.alg.values[i+1], 0, this.max, 110, 440),
+        //         this.context.currentTime + i/60/this.alg.values.length
+        //     );
+        // }
+        this.osc1.frequency.value = map(this.alg.values[this.alg.values.length-2], 0, this.max, 110, 440);
+        this.osc2.frequency.value = map(this.alg.values[this.alg.values.length-1], 0, this.max, 110, 440);
     }
 }

@@ -2,8 +2,21 @@ class ImageVisualizer extends SoundVisualizer {
     constructor(img, scl) {
         super();
 
+        this.original = img;
+        this.img = img;
+    }
+
+    useList(arr) {
+        //function chooses a scaling factor such that it has the largest possible array that is
+        //under the length of the passed array
+        let scl = Math.min(1, Math.sqrt(arr.length / (this.original.width * this.original.height)));
+
         this.img = createGraphics(img.width*scl, img.height*scl);
-        this.img.copy(img, 0, 0, img.width, img.height, 0, 0, this.img.width, this.img.height);
+        this.img.copy(
+            this.original,
+            0, 0, this.original.width, this.original.height,
+            0, 0, this.img.width, this.img.height
+        );
 
         this.img.loadPixels();
         this.arr = Array.from(Array(this.img.pixels.length/4).keys());
@@ -16,13 +29,6 @@ class ImageVisualizer extends SoundVisualizer {
         for(let i in this.img.pixels) {
             this.pixelLookup.push(this.img.pixels[i]);
         }
-
-        console.log(this.pixelLookup.length)
-    }
-
-    useList() {
-        //do nothing when array is passed
-        //actual array must be strictly [1...N] where N is the number of pixels in the image
     }
 
     draw() {

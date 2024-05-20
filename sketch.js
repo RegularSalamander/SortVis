@@ -106,7 +106,7 @@ function mousePressed() {
 
 function* algSeries(list) {
     for(let i in list) {
-        if(list[i].n != vis.arr.length) {
+        if(i == 0 || list[i].n != list[i-1].n) {
             arr = Array.from(Array(list[i].n).keys());
             vis.useList(arr);
             vis.done = true;
