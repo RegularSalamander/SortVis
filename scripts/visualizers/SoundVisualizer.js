@@ -53,22 +53,22 @@ class SoundVisualizer extends Visualizer {
             //play each frequency sequentially
             for(let i = 0; i < this.alg.values.length; i += 2) {
                 this.osc1.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[i], 0, this.max, 110, 440),
+                    map(this.alg.values[i], this.min, this.max, 110, 440),
                     this.context.currentTime + i/60/this.alg.values.length
                 );
                 this.osc2.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[i+1], 0, this.max, 110, 440) + 10, //slight offset of 10 Hz
+                    map(this.alg.values[i+1], this.min, this.max, 110, 440) + 10, //slight offset of 10 Hz
                     this.context.currentTime + i/60/this.alg.values.length
                 );
             }
         } else {
             //play only the last two frequencies
             this.osc1.frequency.linearRampToValueAtTime(
-                map(this.alg.values[this.alg.values.length-2], 0, this.max, 110, 440),
+                map(this.alg.values[this.alg.values.length-2], this.min, this.max, 110, 440),
                 this.context.currentTime + 1/60
             );
             this.osc2.frequency.linearRampToValueAtTime(
-                map(this.alg.values[this.alg.values.length-1], 0, this.max, 110, 440),
+                map(this.alg.values[this.alg.values.length-1], this.min, this.max, 110, 440),
                 this.context.currentTime + 1/60
             );
         }

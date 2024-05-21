@@ -33,8 +33,10 @@ class ImageVisualizer extends SoundVisualizer {
         }
 
         this.max = this.arr[0].value;
+        this.min = this.arr[0].value;
         for(let i in this.arr) {
             if(this.arr[i].value > this.max) this.max = this.arr[i].value;
+            if(this.arr[i].value < this.min) this.min = this.arr[i].value;
         }
     }
 
