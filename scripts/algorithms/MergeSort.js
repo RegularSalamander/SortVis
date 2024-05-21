@@ -27,7 +27,7 @@ class MergeSort extends Sorter {
         let midpointer = mid+1;
         let mergeArray = [];
         while(startpointer <= mid && midpointer <= end) {
-            if(this.doCompare(midpointer, startpointer)) {
+            if(!this.doCompare(startpointer, midpointer)) {
                 mergeArray.push(this.doRead(startpointer));
                 startpointer++;
             } else {

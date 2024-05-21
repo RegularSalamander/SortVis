@@ -2,7 +2,7 @@ class IterativeMergeSort extends Sorter {
     constructor() {
         super();
 
-        this.name = "Bottom-Up Merge Sort";
+        this.name = "Iterative Merge Sort";
     }
     
     * sort() {
@@ -18,7 +18,7 @@ class IterativeMergeSort extends Sorter {
         let midpointer = mid;
         let mergeArray = [];
         while(startpointer < mid && midpointer < end) {
-            if(this.doCompare(midpointer, startpointer)) {
+            if(!this.doCompare(startpointer, midpointer)) {
                 mergeArray.push(this.arr[startpointer]);
                 startpointer++;
             } else {
