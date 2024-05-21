@@ -53,8 +53,10 @@ function draw() {
     vis.draw();
     vis.alg.writeInfo();
 
-    if(frameCount % 60 == 0)
-        console.log(frameRate())
+    fill(255);
+    noStroke(0);
+    textSize(16);
+    text(Math.floor(frameRate()), 10, 20);
 }
 
 function mousePressed() {
@@ -70,6 +72,10 @@ function* algSeries(list) {
         }
         vis.useAlgorithm(list[i].alg);
         speed = list[i].speed;
+
+        console.log("Starting Algorithm", list[i].alg.name);
+        console.log("List size:", list[i].n);
+        console.log("Sort Speed:", list[i].speed);
         yield;
     }
 }
