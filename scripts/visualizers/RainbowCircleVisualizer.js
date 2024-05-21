@@ -6,8 +6,8 @@ class RainbowCircleVisualizer extends SoundVisualizer {
         noStroke();
         colorMode(HSB, 255, 255, 255);
         for(let i = 0; i < this.arr.length; i++) {
-            if(flashing && this.alg.accessing.has(i)) fill(this.arr[i]/this.max*255, 128, 255);
-            else fill(this.arr[i]/this.max*255, 255, 255);
+            if(flashing && this.alg.accessing.has(i)) fill(this.arr[i].value/this.max*255, 128, 255);
+            else fill(this.arr[i].value/this.max*255, 255, 255);
             arc(
                 width/2, height/2,
                 diam, diam,

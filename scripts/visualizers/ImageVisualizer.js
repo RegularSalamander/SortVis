@@ -1,15 +1,15 @@
 class ImageVisualizer extends SoundVisualizer {
-    constructor(img, scl) {
+    constructor(img) {
         super();
 
         this.original = img;
         this.img = img;
     }
 
-    useList(arr) {
+    makeArray(n, func) {
         //function chooses a scaling factor such that it has the largest possible array that is
-        //under the length of the passed array
-        let scl = Math.min(1, Math.sqrt(arr.length / (this.original.width * this.original.height)));
+        //under the length given, to a max of the number of pixels in the original image
+        let scl = Math.min(1, Math.sqrt(n / (this.original.width * this.original.height)));
 
         this.img = createGraphics(img.width*scl, img.height*scl);
         this.img.copy(
@@ -19,15 +19,22 @@ class ImageVisualizer extends SoundVisualizer {
         );
 
         this.img.loadPixels();
-        this.arr = Array.from(Array(this.img.pixels.length/4).keys());
-        this.max = this.img.width*this.img.height;
+        this.arr = [];
+        n = this.img.pixels.length / 4;
 
-        console.log(this.img.pixels.length/4);
+        for(let i = 0; i < n; i++) {
+            let element = { index: i };
+            element.r = this.img.pixels[i*4];
+            element.g = this.img.pixels[i*4 + 1];
+            element.b = this.img.pixels[i*4 + 2];
+            element.a = this.img.pixels[i*4 + 3];
+            element.value = func(element);
+            this.arr.push(element);
+        }
 
-        //pixelLookup as a copy of the original pixels array
-        this.pixelLookup = [];
-        for(let i in this.img.pixels) {
-            this.pixelLookup.push(this.img.pixels[i]);
+        this.max = this.arr[0].value;
+        for(let i in this.arr) {
+            if(this.arr[i].value > this.max) this.max = this.arr[i].value;
         }
     }
 
@@ -42,10 +49,10 @@ class ImageVisualizer extends SoundVisualizer {
                 this.img.pixels[i*4 + 2] = 255;
                 this.img.pixels[i*4 + 3] = 255;
             } else {
-                this.img.pixels[i*4] = this.pixelLookup[this.arr[i]*4];
-                this.img.pixels[i*4 + 1] = this.pixelLookup[this.arr[i]*4 + 1];
-                this.img.pixels[i*4 + 2] = this.pixelLookup[this.arr[i]*4 + 2];
-                this.img.pixels[i*4 + 3] = this.pixelLookup[this.arr[i]*4 + 3];
+                this.img.pixels[i*4] = this.arr[i].r;
+                this.img.pixels[i*4 + 1] = this.arr[i].g;
+                this.img.pixels[i*4 + 2] = this.arr[i].b;
+                this.img.pixels[i*4 + 3] = this.arr[i].a;
             }
         }
         this.img.updatePixels();

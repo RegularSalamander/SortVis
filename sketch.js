@@ -63,10 +63,10 @@ function mousePressed() {
     vis.setup();
 }
 
-function* algSeries(list) {
+function* algSeries(func, list) {
     for(let i in list) {
         if(i == 0 || list[i].n != list[i-1].n) {
-            vis.useList(Array.from(Array(list[i].n).keys()));
+            vis.makeArray(list[i].n, func);
             vis.done = true;
             if(i > 0) yield;
         }

@@ -7,9 +7,9 @@ class BarVisualizer extends SoundVisualizer {
             else fill(255);
             rect(
                 Math.floor(i*width/this.arr.length),
-                height*(1-this.arr[i]/this.max),
+                height*(1-this.arr[i].value/this.max),
                 Math.ceil(width/this.arr.length),
-                height*this.arr[i]/this.max
+                height*this.arr[i].value/this.max
             );
         }
     }

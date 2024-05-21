@@ -1,7 +1,7 @@
-imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png";
+// imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png";
 
 function loadSequence() {
-    flashing = false;
+    flashing = true;
     fullSound = true;
 
     // vis = new BarVisualizer();
@@ -20,16 +20,18 @@ function loadSequence() {
     // let speedCoef = 1;
     
     // for ImageVisualizer
-    let listMult = 5;
+    let listMult = 4;
     let badAlgDiv = 3;
     let speedCoef = 32;
 
-    algIterator = algSeries([
-        //quicksorts
-        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
-        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LR"})},
-        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
-        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LL"})},
+    algIterator = algSeries(
+        (a) => a.r + a.g + a.b,
+        [
+        // //quicksorts
+        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        // {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
+        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        // {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
 
         //mergesorts
         {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},

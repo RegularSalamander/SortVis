@@ -16,7 +16,7 @@ class Sorter {
         this.nf = nf.format;
     }
 
-    useList(arr) {
+    useArray(arr) {
         this.arr = arr;
     }
 
@@ -32,17 +32,17 @@ class Sorter {
     doCompare(idx1, idx2) {
         this.accessing.add(idx1);
         this.accessing.add(idx2);
-        this.values.push(this.arr[idx1], this.arr[idx2]);
+        this.values.push(this.arr[idx1].value, this.arr[idx2].value);
         this.compares++;
         this.reads += 2;
 
-        return this.arr[idx1] > this.arr[idx2];
+        return this.arr[idx1].value > this.arr[idx2].value;
     }
 
     doSwap(idx1, idx2) {
         this.accessing.add(idx1);
         this.accessing.add(idx2);
-        this.values.push(this.arr[idx1], this.arr[idx2]);
+        this.values.push(this.arr[idx1].value, this.arr[idx2].value);
         this.reads += 2;
         this.writes += 2;
         this.swaps++;
@@ -54,18 +54,18 @@ class Sorter {
 
     doRead(idx) {
         this.accessing.add(idx);
-        this.values.push(this.arr[idx]);
+        this.values.push(this.arr[idx].value);
         this.reads++;
 
         return this.arr[idx];
     }
 
-    doWrite(idx, val) {
+    doWrite(idx, obj) {
         this.accessing.add(idx);
-        this.values.push(val);
+        this.values.push(obj.value);
         this.writes++;
 
-        this.arr[idx] = val;
+        this.arr[idx] = obj;
     }
 
     * sort() {

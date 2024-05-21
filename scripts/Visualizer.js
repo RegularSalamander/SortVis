@@ -13,21 +13,24 @@ class Visualizer {
         this.started = true;
     }
 
-    useList(arr) {
-        this.arr = arr;
+    makeArray(n, func) {
+        this.arr = [];
 
-        //exceeds maximum stack size with very large lists
-        // this.max = Math.max(...this.arr);
+        for(let i = 0; i < n; i++) {
+            let element = { index: i };
+            element.value = func(element);
+            this.arr.push(element);
+        }
 
-        this.max = this.arr[0];
+        this.max = this.arr[0].value;
         for(let i in this.arr) {
-            if(this.arr[i] > this.max) this.max = this.arr[i]
+            if(this.arr[i].value > this.max) this.max = this.arr[i].value;
         }
     }
 
     useAlgorithm(alg) {
         this.alg = alg;
-        this.alg.useList(this.arr);
+        this.alg.useArray(this.arr);
 
         this.done = false;
     }
