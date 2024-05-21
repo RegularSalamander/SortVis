@@ -4,47 +4,71 @@ function loadSequence() {
     flashing = false;
     fullSound = true;
 
-    vis = new RainbowBarVisualizer(img, 1);
+    // vis = new BarVisualizer();
+    // vis = new ScatterVisualizer();
+    // vis = new RainbowCircleVisualizer();
+    vis = new ImageVisualizer(img, 1);
+
+    // // for BarVisualizer or RainbowBarVisualizer
+    // let listMult = 0;
+    // let badAlgDiv = 0;
+    // let speedCoef = 1;
+
+    // // for ScatterVisualizer or RainbowCircleVisualizer
+    // let listMult = -1;
+    // let badAlgDiv = 0;
+    // let speedCoef = 1;
+    
+    // for ImageVisualizer
+    let listMult = 5;
+    let badAlgDiv = 3;
+    let speedCoef = 32;
 
     algIterator = algSeries([
-        //bubble sorts
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new BubbleSort()},
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new CocktailSort()},
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new OddEvenSort()},
-        {n: Math.pow(2, 11), speed: 40, alg: new Shuffle()},
-        {n: Math.pow(2, 11), speed: 100, alg: new CombSort({shrink: 1.3})},
-
-        //insertion sorts
-        {n: Math.pow(2, 10), speed: 20, alg: new Shuffle()},
-        {n: Math.pow(2, 10), speed: 100, alg: new InsertionSort()},
-        {n: Math.pow(2, 10), speed: 20, alg: new Shuffle()},
-        {n: Math.pow(2, 10), speed: 100, alg: new BinaryInsertionSort()},
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new GnomeSort()},
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new ShellSort({shrink: 2.5})},
-
-        //selection sorts
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new SelectionSort()},
-        {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
-        {n: Math.pow(2, 9), speed: 100, alg: new DoubleSelectionSort()},
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 50, alg: new HeapSort()},
-        
         //quicksorts
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 50, alg: new QuickSort({partitionType:"LR"})},
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 50, alg: new QuickSort({partitionType:"LL"})},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LR"})},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LL"})},
 
         //mergesorts
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 50, alg: new MergeSort()},
-        {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 50, alg: new IterativeMergeSort()},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new MergeSort()},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new IterativeMergeSort()},
+
+        //bubble sorts
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new BubbleSort()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new CocktailSort()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new OddEvenSort()},
+        {n: Math.pow(2, 11+listMult), speed: 40*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 11+listMult), speed: 50*speedCoef, alg: new CombSort({shrink: 1.3})},
+
+        //insertion sorts
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 20*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new InsertionSort()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 20*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new BinaryInsertionSort()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new GnomeSort()},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new ShellSort({shrink: 2.5})},
+
+        //selection sorts
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new SelectionSort()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new DoubleSelectionSort()},
+        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new HeapSort()},
+
+        //joke sorts
+        {n: Math.pow(2, 8+listMult-badAlgDiv), speed: 5*speedCoef, alg: new Shuffle()},
+        {n: Math.pow(2, 8+listMult-badAlgDiv), speed: 50*speedCoef, alg: new StoogeSort()},
+        {n: 9, speed: 0.18, alg: new Shuffle()},
+        {n: 9, speed: 1000, alg: new BogoSort()}
     ]);
 }
