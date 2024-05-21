@@ -28,10 +28,10 @@ class MergeSort extends Sorter {
         let mergeArray = [];
         while(startpointer <= mid && midpointer <= end) {
             if(this.doCompare(midpointer, startpointer)) {
-                mergeArray.push(this.arr[startpointer]);
+                mergeArray.push(this.doRead(startpointer));
                 startpointer++;
             } else {
-                mergeArray.push(this.arr[midpointer]);
+                mergeArray.push(this.doRead(midpointer));
                 midpointer++;
             }
             yield;
