@@ -1,8 +1,8 @@
-// imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png";
+imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png";
 
 function loadSequence() {
-    flashing = true;
-    fullSound = false;
+    flashing = false;
+    fullSound = true;
 
     vis = new RainbowBarVisualizer(img, 1);
 
@@ -20,6 +20,8 @@ function loadSequence() {
         //insertion sorts
         {n: Math.pow(2, 10), speed: 20, alg: new Shuffle()},
         {n: Math.pow(2, 10), speed: 100, alg: new InsertionSort()},
+        {n: Math.pow(2, 10), speed: 20, alg: new Shuffle()},
+        {n: Math.pow(2, 10), speed: 100, alg: new BinaryInsertionSort()},
         {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
         {n: Math.pow(2, 9), speed: 100, alg: new GnomeSort()},
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
@@ -31,18 +33,18 @@ function loadSequence() {
         {n: Math.pow(2, 9), speed: 10, alg: new Shuffle()},
         {n: Math.pow(2, 9), speed: 100, alg: new DoubleSelectionSort()},
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new HeapSort()},
+        {n: Math.pow(2, 12), speed: 50, alg: new HeapSort()},
         
         //quicksorts
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new QuickSort({partitionType:"LR"})},
+        {n: Math.pow(2, 12), speed: 50, alg: new QuickSort({partitionType:"LR"})},
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new QuickSort({partitionType:"LL"})},
+        {n: Math.pow(2, 12), speed: 50, alg: new QuickSort({partitionType:"LL"})},
 
         //mergesorts
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new MergeSort()},
+        {n: Math.pow(2, 12), speed: 50, alg: new MergeSort()},
         {n: Math.pow(2, 12), speed: 80, alg: new Shuffle()},
-        {n: Math.pow(2, 12), speed: 100, alg: new IterativeMergeSort()},
+        {n: Math.pow(2, 12), speed: 50, alg: new IterativeMergeSort()},
     ]);
 }
