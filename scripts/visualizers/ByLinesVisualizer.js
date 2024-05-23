@@ -1,4 +1,4 @@
-class ImageVisualizer extends SoundVisualizer {
+class ByLinesVisualizer extends Visualizer {
     constructor(img) {
         super();
 
@@ -41,21 +41,54 @@ class ImageVisualizer extends SoundVisualizer {
         }
     }
 
+    useAlgorithm(alg) {
+        this.algs = [];
+        for(let i = 0; i < this.img.height; i++) {
+            let algClone = Object.assign(Object.create(Object.getPrototypeOf(alg)), alg);
+
+            let list = [];
+            for(let j = 0; j < this.img.width; j++) {
+                list.push(this.arr[i*this.img.width + j]);
+            }
+            algClone.useArray(list);
+
+            this.algs.push(algClone);
+        }
+
+        this.alg = this.algs[0];
+        this.done = false;
+    }
+    
+    step(iters) {
+        this.done = true;
+        for(let i = 0; i < this.img.height; i++) {
+            let done = this.algs[i].step(iters)
+            if(done) this.algs[i].accessing.clear();
+
+            this.done &&= done;
+        }
+
+        if(this.done) {
+            //copy lists back over to this.arr
+            this.arr = []
+            for(let i = 0; i < this.algs.length; i++) {
+                for(let j = 0; j < this.algs[i].arr.length; j++) {
+                    this.arr.push(this.algs[i].arr[j]);
+                }
+            }
+        }
+    }
+
     draw() {
         background(0);
         noStroke();
 
-        for(let i in this.arr) {
-            if(flashing && this.alg.accessing.has(parseInt(i))) {
-                this.img.pixels[i*4] = 255;
-                this.img.pixels[i*4 + 1] = 255;
-                this.img.pixels[i*4 + 2] = 255;
-                this.img.pixels[i*4 + 3] = 255;
-            } else {
-                this.img.pixels[i*4] = this.arr[i].r;
-                this.img.pixels[i*4 + 1] = this.arr[i].g;
-                this.img.pixels[i*4 + 2] = this.arr[i].b;
-                this.img.pixels[i*4 + 3] = this.arr[i].a;
+        for(let i = 0; i < this.img.height; i++) {
+            for(let j = 0; j < this.img.width; j++) {
+                this.img.pixels[i*this.img.width*4 + j*4] = this.algs[i].arr[j].r;
+                this.img.pixels[i*this.img.width*4 + j*4 + 1] = this.algs[i].arr[j].g;
+                this.img.pixels[i*this.img.width*4 + j*4 + 2] = this.algs[i].arr[j].b;
+                this.img.pixels[i*this.img.width*4 + j*4 + 3] = this.algs[i].arr[j].a;
             }
         }
         this.img.updatePixels();

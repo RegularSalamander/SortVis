@@ -10,8 +10,6 @@ class Sorter {
 
         this.arr = null;
 
-        this.iterator = this.sort();
-
         let nf = new Intl.NumberFormat();
         this.nf = nf.format;
     }
@@ -21,6 +19,9 @@ class Sorter {
     }
 
     step(iters) {
+        if(!this.iterator) {
+            this.iterator = this.sort();
+        }
         this.accessing.clear();
         this.values = [];
         for(let i = 0; i < iters; i++)
