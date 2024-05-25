@@ -2,7 +2,8 @@
 // imgAddress = "https://upload.wikimedia.org/wikipedia/commons/d/d1/PM5544_MK10.png"
 
 const idxFunc = (a) => a.index;
-const brightnessFunc = (a) => 1-(a.r + a.g + a.b + Math.random())
+const brightnessFunc = (a) => - (a.r + a.g + a.b + Math.random())
+const luminanceFunc = (a) => - (0.2126*a.r + 0.7152*a.g + 0.0722*a.b + Math.random())
 const hueFunc = (a) => {
     let R = (a.r) / 255;
     let G = (a.g) / 255;
@@ -17,7 +18,7 @@ const hueFunc = (a) => {
 
 function loadSequence() {
     flashing = false;
-    fullSound = true;
+    fullSound = false;
 
     // vis = new RainbowBarVisualizer();
     // vis = new ScatterVisualizer();
@@ -36,56 +37,63 @@ function loadSequence() {
     
     // for ImageVisualizer
     let listMult = 4;
-    let badAlgDiv = 2;
-    let speedCoef = 32;
+    let badAlgDiv = 0;
+    let speedCoef = 16;
+    let badAlgSpeedCoef = 16;
+
+    let baseSpeed = 0.001;
+    let size = Math.pow(2, 16);
+    const nlogn = (n) => n*Math.log2(n);
+    const nsquared = (n) => Math.pow(n, 2);
+    const Ocomb = (n) => Math.pow(n, 2) / Math.pow(2, (Math.log(n)/Math.log(1.3))) * Math.pow(10, 9);
 
     algIterator = algSeries(
-        brightnessFunc,
+        luminanceFunc,
         [
-        // //quicksorts
-        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        // {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
-        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        // {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
+        //quicksorts
+        {n: size, speed: baseSpeed*nlogn(size), alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
+        {n: size, speed: 800, alg: new Reset()},
+        {n: size, speed: baseSpeed*nlogn(size), alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
+        {n: size, speed: 800, alg: new Reset()},
 
-        // // mergesorts
-        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        // {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new MergeSort()},
-        // {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new IterativeMergeSort()},
+        // mergesorts
+        {n: size, speed: baseSpeed*nlogn(size), alg: new MergeSort()},
+        {n: size, speed: 800, alg: new Reset()},
+        {n: size, speed: baseSpeed*nlogn(size), alg: new IterativeMergeSort()},
+        {n: size, speed: 800, alg: new Reset()},
 
         //bubble sorts
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new BubbleSort()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new CocktailSort()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new OddEvenSort()},
-        {n: Math.pow(2, 11+listMult), speed: 40*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 11+listMult), speed: 50*speedCoef, alg: new CombSort({shrink: 1.3})},
+        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new BubbleSort()},
+        {n: size/8, speed: 800/8, alg: new Reset()},
+        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new CocktailSort()},
+        {n: size/8, speed: 800/8, alg: new Reset()},
+        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new OddEvenSort()},
+        {n: size/8, speed: 800/8, alg: new Reset()},
+        {n: size/2, speed: baseSpeed*Ocomb(size/2), alg: new CombSort({shrink: 1.3})},
+        {n: size/2, speed: 800/2, alg: new Reset()},
 
         //insertion sorts
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 20*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new InsertionSort()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 20*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new BinaryInsertionSort()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new GnomeSort()},
-        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new ShellSort({shrink: 2.5})},
+        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new InsertionSort()},
+        {n: size/8, speed: 800/8, alg: new Reset()},
+        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new BinaryInsertionSort()},
+        {n: size/8, speed: 800/8, alg: new Reset()},
+        // {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new GnomeSort()},
+        // {n: size/8, speed: 800/8, alg: new Reset()},
+        {n: size, speed: baseSpeed*nlogn(size), alg: new ShellSort({shrink: 2.5})},
+        {n: size, speed: 800, alg: new Reset()},
 
         //selection sorts
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new SelectionSort()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 10*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 9+listMult-badAlgDiv), speed: 50*speedCoef, alg: new DoubleSelectionSort()},
-        {n: Math.pow(2, 12+listMult), speed: 80*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 12+listMult), speed: 50*speedCoef, alg: new HeapSort()},
+        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new SelectionSort()},
+        {n: size/4, speed: 800/4, alg: new Reset()},
+        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new DoubleSelectionSort()},
+        {n: size/4, speed: 800/4, alg: new Reset()},
+        {n: size, speed: baseSpeed*nlogn(size), alg: new HeapSort()},
+        {n: size, speed: 800, alg: new Reset()},
 
-        //joke sorts
-        {n: Math.pow(2, 8+listMult-badAlgDiv), speed: 5*speedCoef, alg: new Reset()},
-        {n: Math.pow(2, 8+listMult-badAlgDiv), speed: 50*speedCoef, alg: new StoogeSort()},
-        {n: 9, speed: 0.18, alg: new Reset()},
-        {n: 9, speed: 1000, alg: new BogoSort()}
+        // //joke sorts
+        // {n: size, speed: baseSpeed, alg: new StoogeSort()},
+        // {n: size, speed: 800, alg: new Reset()},
+        // {n: size, speed: baseSpeed, alg: new BogoSort()},
+        // {n: size, speed: 800, alg: new Reset()},
     ]);
 }

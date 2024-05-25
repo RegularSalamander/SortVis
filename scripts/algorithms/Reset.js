@@ -7,14 +7,12 @@ class Reset extends Sorter {
     
     * sort() {
         for(let i = 0; i < this.arr.length; i++) {
-            let dst = this.doRead(0).index;
-            do{
+            let dst = this.arr[i].index;
+            while(dst != i) {
                 this.doSwap(i, dst);
-                dst = this.doRead(i).index;
+                dst = this.arr[i].index;
                 yield;
             }
-            while(dst != i);
-            
         }
     }
 }

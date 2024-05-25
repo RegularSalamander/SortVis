@@ -62,15 +62,19 @@ class SoundVisualizer extends Visualizer {
                 );
             }
         } else {
-            //play only the last two frequencies
-            this.osc1.frequency.linearRampToValueAtTime(
-                map(this.alg.values[this.alg.values.length-2], this.min, this.max, 110, 440),
-                this.context.currentTime + 1/60
-            );
-            this.osc2.frequency.linearRampToValueAtTime(
-                map(this.alg.values[this.alg.values.length-1], this.min, this.max, 110, 440),
-                this.context.currentTime + 1/60
-            );
+            if(this.alg.values.length > 0) {
+                //play only the last two frequencies
+                this.osc1.frequency.linearRampToValueAtTime(
+                    map(this.alg.values[this.alg.values.length-2], this.min, this.max, 110, 440),
+                    this.context.currentTime + 1/60
+                );
+            }
+            if(this.alg.values.length > 1) {
+                this.osc2.frequency.linearRampToValueAtTime(
+                    map(this.alg.values[this.alg.values.length-1], this.min, this.max, 110, 440) + 10,
+                    this.context.currentTime + 1/60
+                );
+            }
         }
     }
 }
