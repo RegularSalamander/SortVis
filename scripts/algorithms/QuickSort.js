@@ -10,34 +10,20 @@ class QuickSort extends Sorter {
         this.name = "Quicksort";
     }
 
-    writeInfo() {
+    specificInfo() {
         if(this.insertionCutoff) {
-            this.drawInfoList([
-                this.name || "(No algorithm)",
+            return [
+                this.name,
                 `${this.partitionType} Pointers`,
                 `Pivot: ${this.pivotStyle}`,
-                `Insertion Sort Cutoff: ${this.insertionCutoff}`,
-                null,
-                `N = ${this.nf(this.arr.length)}`,
-                null,
-                `Comparisons: ${this.nf(this.compares)}`,
-                `Reads: ${this.nf(this.reads)}`,
-                `Writes: ${this.nf(this.writes)}`,
-                `Swaps: ${this.nf(this.swaps)}`
-            ]);
+                `Insertion Sort Cutoff: ${this.insertionCutoff}`
+            ];
         } else {
-            this.drawInfoList([
-                this.name || "(No algorithm)",
+            return [
+                this.name,
                 `${this.partitionType} Pointers`,
-                `Pivot: ${this.pivotStyle}`,
-                null,
-                `N = ${this.nf(this.arr.length)}`,
-                null,
-                `Comparisons: ${this.nf(this.compares)}`,
-                `Reads: ${this.nf(this.reads)}`,
-                `Writes: ${this.nf(this.writes)}`,
-                `Swaps: ${this.nf(this.swaps)}`
-            ]);
+                `Pivot: ${this.pivotStyle}`
+            ];
         }
     }
 

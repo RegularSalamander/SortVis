@@ -81,8 +81,7 @@ class Sorter {
     }
 
     writeInfo() {
-        this.drawInfoList([
-            this.name || `(No algorithm)`,
+        let info = [
             null,
             `N = ${this.nf(this.arr.length)}`,
             null,
@@ -90,21 +89,26 @@ class Sorter {
             `Reads: ${this.nf(this.reads)}`,
             `Writes: ${this.nf(this.writes)}`,
             `Swaps: ${this.nf(this.swaps)}`
-        ]);
+        ]
+        if(this.specificInfo) {
+            this.drawInfoList(...this.specificInfo(), ...info);
+        } else {
+            this.drawInfoList(this.name || `(No algorithm)`, ...info);
+        }
     }
 
     /*
     Takes in a list of strings and writes each one to the screen as one line.
     null values are treated as small gaps between lines.
     */
-    drawInfoList(list) {
+    drawInfoList() {
         fill(255);
         noStroke();
         textSize(32);
         let y = 50;
-        for(let i in list) {
-            if(list[i]) {
-                text(list[i], 20, y);
+        for(let i in arguments) {
+            if(arguments[i]) {
+                text(arguments[i], 20, y);
                 y += 35;
             } else {
                 y += 20;

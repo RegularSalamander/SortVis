@@ -8,18 +8,11 @@ class ShellSort extends Sorter {
         this.name = `Shell Sort`;
     }
     
-    writeInfo() {
-        this.drawInfoList([
-            this.name || "(No algorithm)",
-            `Shrink factor: ${this.shrink}`,
-            null,
-            `N = ${this.nf(this.arr.length)}`,
-            null,
-            `Comparisons: ${this.nf(this.compares)}`,
-            `Reads: ${this.nf(this.reads)}`,
-            `Writes: ${this.nf(this.writes)}`,
-            `Swaps: ${this.nf(this.swaps)}`
-        ]);
+    specificInfo() {
+        return [
+            this.name,
+            `Shrink factor: ${this.shrink}`
+        ];
     }
 
     * sort() {

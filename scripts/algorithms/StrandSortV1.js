@@ -5,18 +5,11 @@ class StrandSortV1 extends Sorter {
         this.name = "Strand Sort";
     }
 
-    writeInfo() {
-        this.drawInfoList([
+    specificInfo() {
+        return [
             this.name || "(No algorithm)",
-            `Version 1 (frequent merging)`,
-            null,
-            `N = ${this.nf(this.arr.length)}`,
-            null,
-            `Comparisons: ${this.nf(this.compares)}`,
-            `Reads: ${this.nf(this.reads)}`,
-            `Writes: ${this.nf(this.writes)}`,
-            `Swaps: ${this.nf(this.swaps)}`
-        ]);
+            `Version 1 (frequent merging)`
+        ];
     }
     
     * sort() {
