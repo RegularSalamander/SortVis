@@ -8,6 +8,10 @@ class Sorter {
         this.accessing = new Set();
         this.values = [];
 
+        this.visualStartTime;
+        this.visualTime = 0;
+        this.sortTime = 0;
+
         this.arr = null;
 
         let nf = new Intl.NumberFormat();
@@ -19,14 +23,22 @@ class Sorter {
     }
 
     step(iters) {
+        if(!this.visualStartTime) this.visualStartTime = performance.now();
+
         if(!this.iterator) {
             this.iterator = this.sort();
         }
+
         this.accessing.clear();
         this.values = [];
-        for(let i = 0; i < iters; i++)
-            if(this.iterator.next().done)
-                return true;
+
+        for(let i = 0; i < iters; i++) {
+            let startTime = performance.now();
+            let done = this.iterator.next().done;
+            this.sortTime += performance.now() - startTime;
+            this.visualTime = performance.now() - this.visualStartTime;
+            if(done) return true;
+        }
         return false;
     }
 
@@ -88,7 +100,10 @@ class Sorter {
             `Comparisons: ${this.nf(this.compares)}`,
             `Reads: ${this.nf(this.reads)}`,
             `Writes: ${this.nf(this.writes)}`,
-            `Swaps: ${this.nf(this.swaps)}`
+            `Swaps: ${this.nf(this.swaps)}`,
+            null,
+            `Visual Time: ${this.nf(this.visualTime/1000)} s`,
+            `Sort Time: ${this.nf(this.sortTime)} ms`
         ]
         if(this.specificInfo) {
             this.drawInfoList(...this.specificInfo(), ...info);
