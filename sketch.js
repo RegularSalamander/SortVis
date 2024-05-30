@@ -39,6 +39,7 @@ function draw() {
     }
     
     if(vis.done && !waiting) {
+        console.log(vis.alg.name, vis.alg.visualTime/30000*speed)
         setTimeout(
             () => {
                 algIterator.next();
@@ -73,9 +74,7 @@ function* algSeries(func, list) {
         vis.useAlgorithm(list[i].alg);
         speed = list[i].speed;
 
-        console.log("Starting Algorithm", list[i].alg.name);
-        console.log("List size:", list[i].n);
-        console.log("Sort Speed:", list[i].speed);
+        
         yield;
     }
 }

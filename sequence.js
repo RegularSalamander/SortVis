@@ -1,9 +1,10 @@
 // imgAddress = "https://upload.wikimedia.org/wikipedia/en/2/27/Bliss_%28Windows_XP%29.png";
 // imgAddress = "https://upload.wikimedia.org/wikipedia/commons/d/d1/PM5544_MK10.png"
+// imgAddress = "https://upload.wikimedia.org/wikipedia/commons/8/82/Gold_Hill%2C_Shaftsbury%2C_Dorset%2C_England.JPG"
 
 const idxFunc = (a) => a.index;
 const brightnessFunc = (a) => - (a.r + a.g + a.b + Math.random())
-const luminanceFunc = (a) => - ((0.2126*a.r + 0.7152*a.g + 0.0722*a.b)*100 + Math.random())
+const luminanceFunc = (a) => - ((0.2126*a.r + 0.7152*a.g + 0.0722*a.b)*50 + Math.random())
 const hueFunc = (a) => {
     let R = (a.r) / 255;
     let G = (a.g) / 255;
@@ -17,94 +18,74 @@ const hueFunc = (a) => {
 }
 
 function loadSequence() {
-    flashing = false;
-    fullSound = false;
+    flashing = true;
+    fullSound = true;
 
-    // vis = new RainbowBarVisualizer();
+    vis = new GradientBarVisualizer([255, 50, 50], [255, 255, 50], [50, 255, 50]);
     // vis = new ScatterVisualizer();
     // vis = new RainbowCircleVisualizer();
-    vis = new ImageVisualizer(img, 1);
+    // vis = new ImageVisualizer(img, 1);
 
-    // // for BarVisualizer or RainbowBarVisualizer
-    // let listMult = 0;
-    // let badAlgDiv = 0;
-    // let speedCoef = 1;
-
-    // // for ScatterVisualizer or RainbowCircleVisualizer
-    // let listMult = -1;
-    // let badAlgDiv = 0;
-    // let speedCoef = 1;
-    
-    // for ImageVisualizer
-    let listMult = 4;
-    let badAlgDiv = 0;
-    let speedCoef = 16;
-    let badAlgSpeedCoef = 16;
-
-    let baseSpeed = 0.0005;
-    let size = Math.pow(2, 16);
-    const nlogn = (n) => n*Math.log2(n);
-    const nsquared = (n) => Math.pow(n, 2);
-    const Ocomb = (n) => Math.pow(n, 2) / Math.pow(2, (Math.log(n)/Math.log(1.3))) * Math.pow(10, 9);
+    let size = 128;
 
     algIterator = algSeries(
-        luminanceFunc,
+        idxFunc,
         [
-        //quicksorts
-        {n: size, speed: baseSpeed*nlogn(size), alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
-        {n: size, speed: 800, alg: new Reset()},
-        {n: size, speed: baseSpeed*nlogn(size), alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
-        {n: size, speed: 800, alg: new Reset()},
+        // // quicksorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.55, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.61, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
 
-        // mergesorts
-        {n: size, speed: baseSpeed*nlogn(size), alg: new MergeSort()},
-        {n: size, speed: 800, alg: new Reset()},
-        {n: size, speed: baseSpeed*nlogn(size), alg: new IterativeMergeSort()},
-        {n: size, speed: 800, alg: new Reset()},
+        // // mergesorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.99, alg: new MergeSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.99, alg: new IterativeMergeSort()},
 
-        //bubble sorts
-        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new BubbleSort()},
-        {n: size/8, speed: 800/8, alg: new Reset()},
-        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new CocktailSort()},
-        {n: size/8, speed: 800/8, alg: new Reset()},
-        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.5, alg: new OddEvenSort()},
-        {n: size/8, speed: 800/8, alg: new Reset()},
-        {n: size/2, speed: baseSpeed*Ocomb(size/2), alg: new CombSort({shrink: 1.3})},
-        {n: size/2, speed: 800/2, alg: new Reset()},
+        // //bubble sorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 4.4, alg: new BubbleSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 3.5, alg: new CocktailSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 4.2, alg: new OddEvenSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.99, alg: new CombSort({shrink: 1.3})},
 
-        //insertion sorts
-        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new InsertionSort()},
-        {n: size/8, speed: 800/8, alg: new Reset()},
-        {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new BinaryInsertionSort()},
-        {n: size/8, speed: 800/8, alg: new Reset()},
-        // {n: size/8, speed: baseSpeed*nsquared(size/8)*0.25, alg: new GnomeSort()},
-        // {n: size/8, speed: 800/8, alg: new Reset()},
-        {n: size, speed: baseSpeed*nlogn(size), alg: new ShellSort({shrink: 2.5})},
-        {n: size, speed: 800, alg: new Reset()},
+        // //insertion sorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 2.2, alg: new InsertionSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 2.7, alg: new BinaryInsertionSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 4.5, alg: new GnomeSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.61, alg: new ShellSort({shrink: 2.5})},
 
-        //selection sorts
-        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new SelectionSort()},
-        {n: size/4, speed: 800/4, alg: new Reset()},
-        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new MaxSelectionSort()},
-        {n: size/4, speed: 800/4, alg: new Reset()},
-        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new BingoSort()},
-        {n: size/4, speed: 800/4, alg: new Reset()},
-        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new DoubleSelectionSort()},
-        {n: size/4, speed: 800/4, alg: new Reset()},
-        {n: size, speed: baseSpeed*nlogn(size), alg: new HeapSort()},
-        {n: size, speed: 800, alg: new Reset()},
+        // //selection sorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 4.7, alg: new SelectionSort()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 4.6, alg: new MaxSelectionSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 1, alg: new BingoSort()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 2.4, alg: new DoubleSelectionSort()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 0.43, alg: new HeapSort()},
 
-        {n: size/2, speed: baseSpeed*nsquared(size/2)/50, alg: new StrandSortV1()},
-        {n: size/2, speed: 800/2, alg: new Reset()},
-        {n: size, speed: baseSpeed*nsquared(size)/100, alg: new StrandSortV2()},
-        {n: size, speed: 800, alg: new Reset()},
-        {n: size, speed: baseSpeed*nsquared(size)/10000, alg: new CircleSort()},
-        {n: size, speed: 800, alg: new Reset()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 2.9, alg: new StrandSortV1()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 1.3, alg: new StrandSortV2()},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 1.5, alg: new CircleSort()},
 
-        // //joke sorts
-        // {n: size, speed: baseSpeed, alg: new StoogeSort()},
-        // {n: size, speed: 800, alg: new Reset()},
-        // {n: size, speed: baseSpeed, alg: new BogoSort()},
-        // {n: size, speed: 800, alg: new Reset()},
+        //joke sorts
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 99, alg: new StoogeSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 1, alg: new BogoSort()},
     ]);
 }
