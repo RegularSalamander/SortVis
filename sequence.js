@@ -41,7 +41,7 @@ function loadSequence() {
     let speedCoef = 16;
     let badAlgSpeedCoef = 16;
 
-    let baseSpeed = 0.001;
+    let baseSpeed = 0.0005;
     let size = Math.pow(2, 16);
     const nlogn = (n) => n*Math.log2(n);
     const nsquared = (n) => Math.pow(n, 2);
@@ -88,6 +88,13 @@ function loadSequence() {
         {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new DoubleSelectionSort()},
         {n: size/4, speed: 800/4, alg: new Reset()},
         {n: size, speed: baseSpeed*nlogn(size), alg: new HeapSort()},
+        {n: size, speed: 800, alg: new Reset()},
+
+        {n: size/2, speed: baseSpeed*nsquared(size/2)/50, alg: new StrandSortV1()},
+        {n: size/2, speed: 800/2, alg: new Reset()},
+        {n: size, speed: baseSpeed*nsquared(size)/100, alg: new StrandSortV2()},
+        {n: size, speed: 800, alg: new Reset()},
+        {n: size, speed: baseSpeed*nsquared(size)/10000, alg: new CircleSort()},
         {n: size, speed: 800, alg: new Reset()},
 
         // //joke sorts
