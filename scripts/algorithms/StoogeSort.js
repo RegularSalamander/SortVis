@@ -1,4 +1,10 @@
 class StoogeSort extends Sorter {
+    constructor() {
+        super();
+
+        this.name = "Stooge Sort";
+    }
+
     * sort() {
         yield* this.recurse(0, this.arr.length-1);
     }
