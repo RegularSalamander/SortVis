@@ -9,7 +9,7 @@ class MaxSelectionSort extends Sorter {
         let end = this.arr.length - 1;
         while(end > 0) {
             let maxIdx = end;
-            for(let i = end; i > 0; i--) {
+            for(let i = 0; i < end; i++) {
                 if(this.doCompare(i, maxIdx)) {
                     maxIdx = i;
                 }
