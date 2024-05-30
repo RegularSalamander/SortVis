@@ -23,7 +23,7 @@ class ByLinesVisualizer extends Visualizer {
 
         for(let i = 0; i < this.img.pixels.length / 4; i++) {
             let element = {
-                index: i,
+                index: i % this.img.width,
                 r: this.img.pixels[i*4],
                 g: this.img.pixels[i*4 + 1],
                 b: this.img.pixels[i*4 + 2],
@@ -64,8 +64,7 @@ class ByLinesVisualizer extends Visualizer {
         for(let i = 0; i < this.img.height; i++) {
             let done = this.algs[i].step(iters)
             if(done) this.algs[i].accessing.clear();
-
-            this.done &&= done;
+            else this.done = false;
         }
 
         if(this.done) {

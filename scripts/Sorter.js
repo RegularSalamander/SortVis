@@ -40,6 +40,13 @@ class Sorter {
         return this.arr[idx1].value > this.arr[idx2].value;
     }
 
+    doValueCompare(val1, val2) {
+        this.values.push(val1, val2);
+        this.compares++;
+
+        return val1 > val2;
+    }
+
     doSwap(idx1, idx2) {
         this.accessing.add(idx1);
         this.accessing.add(idx2);

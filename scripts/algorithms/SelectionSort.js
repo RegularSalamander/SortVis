@@ -2,7 +2,7 @@ class SelectionSort extends Sorter {
     constructor() {
         super();
 
-        this.name = "Selection Sort";
+        this.name = "Selection Sort (min)";
     }
     
     * sort() {

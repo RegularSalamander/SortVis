@@ -3,7 +3,7 @@
 
 const idxFunc = (a) => a.index;
 const brightnessFunc = (a) => - (a.r + a.g + a.b + Math.random())
-const luminanceFunc = (a) => - (0.2126*a.r + 0.7152*a.g + 0.0722*a.b + Math.random())
+const luminanceFunc = (a) => - ((0.2126*a.r + 0.7152*a.g + 0.0722*a.b)*100 + Math.random())
 const hueFunc = (a) => {
     let R = (a.r) / 255;
     let G = (a.g) / 255;
@@ -84,6 +84,10 @@ function loadSequence() {
 
         //selection sorts
         {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new SelectionSort()},
+        {n: size/4, speed: 800/4, alg: new Reset()},
+        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new MaxSelectionSort()},
+        {n: size/4, speed: 800/4, alg: new Reset()},
+        {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new BingoSort()},
         {n: size/4, speed: 800/4, alg: new Reset()},
         {n: size/4, speed: baseSpeed*nsquared(size/4), alg: new DoubleSelectionSort()},
         {n: size/4, speed: 800/4, alg: new Reset()},
