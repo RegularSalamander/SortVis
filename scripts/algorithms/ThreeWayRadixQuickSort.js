@@ -45,14 +45,11 @@ class ThreeWayRadixQuickSort extends Sorter {
 
         if(this.pivotStyle == "Median of Three") {
             let mid = Math.floor((start+end)/2);
-            if(this.doCompare(start, mid)) this.doSwap(start, mid);
+            if(this.doCompare(start, end)) this.doSwap(start, end);
             yield;
-            if(this.doCompare(mid, end)) this.doSwap(mid, end);
+            if(this.doCompare(end, mid)) this.doSwap(end, mid);
             yield;
-            if(this.doCompare(start, mid)) this.doSwap(start, mid);
-            yield;
-
-            this.doSwap(mid, end);
+            if(this.doCompare(start, end)) this.doSwap(start, end);
             yield;
         }
     }
