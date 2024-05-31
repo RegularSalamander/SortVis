@@ -88,7 +88,7 @@ class QuickSort extends Sorter {
         } else if(this.partitionType == "LR") {
             let i = start;
             let j = end - 1;
-            while(i < j) {
+            while(i <= j) {
                 if(this.doCompare(end, j)) {
                     this.doSwap(i, j);
                     i++;
@@ -99,9 +99,6 @@ class QuickSort extends Sorter {
                 yield;
             }
 
-            if(this.doCompare(end, i)){
-                i++
-            }
             this.doSwap(i, end);
 
             yield;
