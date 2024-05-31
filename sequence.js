@@ -19,7 +19,7 @@ const hueFunc = (a) => {
 
 function loadSequence() {
     flashing = true;
-    fullSound = true;
+    fullSound = false;
 
     vis = new GradientBarVisualizer([255, 50, 50], [255, 255, 50], [50, 255, 50]);
     // vis = new ScatterVisualizer();
@@ -31,17 +31,31 @@ function loadSequence() {
     algIterator = algSeries(
         idxFunc,
         [
-        // // quicksorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.55, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.61, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
+        // quick sorts
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 0.55, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 0.61, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 0.33, alg: new DualPivotQuickSort({pivotStyle:"First and Last Elements"})},
+        {n: size, speed: 1, alg: new Shuffle()},
+        {n: size, speed: 1, alg: new ThreeWayRadixQuickSort({})},
 
-        // // mergesorts
+        // // merge sorts
         // {n: size, speed: 1, alg: new Shuffle()},
         // {n: size, speed: 0.99, alg: new MergeSort()},
         // {n: size, speed: 1, alg: new Shuffle()},
         // {n: size, speed: 0.99, alg: new IterativeMergeSort()},
+
+        // radix sorts
+        {n: size, speed: 10*1, alg: new Shuffle()},
+        {n: size, speed: 10*1.0, alg: new RadixLSDSort({base: 2})},
+        {n: size, speed: 10*1, alg: new Shuffle()},
+        {n: size, speed: 10*1.0, alg: new RadixMSDSort({base: 2})},
+        {n: size, speed: 10*1, alg: new Shuffle()},
+        {n: size, speed: 10*0.42, alg: new RadixLSDSort({base: 10})},
+        {n: size, speed: 10*1, alg: new Shuffle()},
+        {n: size, speed: 10*0.42, alg: new RadixMSDSort({base: 10})},
 
         // //bubble sorts
         // {n: size, speed: 1, alg: new Shuffle()},
@@ -66,26 +80,26 @@ function loadSequence() {
         // //selection sorts
         // {n: size, speed: 1, alg: new Shuffle()},
         // {n: size, speed: 4.7, alg: new SelectionSort()},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 4.6, alg: new MaxSelectionSort()},
         // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 1, alg: new BingoSort()},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 2.4, alg: new DoubleSelectionSort()},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 0.43, alg: new HeapSort()},
-
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 2.9, alg: new StrandSortV1()},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 1.3, alg: new StrandSortV2()},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 1.5, alg: new CircleSort()},
-
-        //joke sorts
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 99, alg: new StoogeSort()},
+        // {n: size, speed: 4.6, alg: new MaxSelectionSort()},
+        // // {n: size, speed: 1, alg: new Shuffle()},
+        // // {n: size, speed: 1, alg: new BingoSort()},
         // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 1, alg: new BogoSort()},
+        // {n: size, speed: 2.4, alg: new DoubleSelectionSort()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 0.43, alg: new HeapSort()},
+
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 2.9, alg: new StrandSortV1()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 1.3, alg: new StrandSortV2()},
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 1.5, alg: new CircleSort()},
+
+        // //joke sorts
+        // {n: size, speed: 1, alg: new Shuffle()},
+        // {n: size, speed: 99, alg: new StoogeSort()},
+        // // {n: size, speed: 1, alg: new Shuffle()},
+        // // {n: size, speed: 1, alg: new BogoSort()},
     ]);
 }
