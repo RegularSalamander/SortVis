@@ -13,7 +13,7 @@ class ThreeWayRadixQuickSort extends Sorter {
         return [
             this.name,
             `Base ${this.base}`,
-            `Pivots: ${this.pivotStyle}`
+            `Pivot: ${this.pivotStyle}`
         ];
     }
 
