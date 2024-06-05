@@ -23,7 +23,7 @@ class CombSort extends Sorter {
             gap = Math.max(Math.floor(gap/this.shrink), 1);
 
             // "rule of 11"
-            //if(gap == 9 || gap == 10) gap = 11;
+            if(gap == 9 || gap == 10) gap = 11;
 
             swapped = false;
             for(let i = 0; i + gap < this.arr.length; i += 1) {
