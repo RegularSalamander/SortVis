@@ -19,87 +19,97 @@ const hueFunc = (a) => {
 
 function loadSequence() {
     flashing = true;
-    fullSound = false;
+    fullSound = true;
 
     vis = new GradientBarVisualizer([255, 50, 50], [255, 255, 50], [50, 255, 50]);
     // vis = new ScatterVisualizer();
     // vis = new RainbowCircleVisualizer();
     // vis = new ImageVisualizer(img, 1);
 
-    let size = 128;
+    let size = 4096;
 
     algIterator = algSeries(
         idxFunc,
         [
         // quick sorts
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 0.55, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 0.61, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 0.33, alg: new DualPivotQuickSort({pivotStyle:"First and Last Elements"})},
-        {n: size, speed: 1, alg: new Shuffle()},
-        {n: size, speed: 1, alg: new ThreeWayRadixQuickSort({})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 32.4, alg: new QuickSort({partitionType:"LR", pivotStyle:"Median of Three"})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 32.4, alg: new QuickSort({partitionType:"LL", pivotStyle:"Median of Three"})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 32.4, alg: new DualPivotQuickSort({pivotStyle:"First and Last Elements"})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 32.4, alg: new ThreeWayRadixQuickSort({base: 10, pivotStyle:"Last Element"})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 32.4, alg: new MultithreadedQuickSort({maxThreads: 8, pivotStyle:"Median of Three"})},
 
-        // // merge sorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.99, alg: new MergeSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.99, alg: new IterativeMergeSort()},
+        // merge sorts
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 57.4, alg: new MergeSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 57.4, alg: new IterativeMergeSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 57.4, alg: new MultithreadedMergeSort({maxThreads: 8})},
 
         // radix sorts
-        {n: size, speed: 10*1, alg: new Shuffle()},
-        {n: size, speed: 10*1.0, alg: new RadixLSDSort({base: 2})},
-        {n: size, speed: 10*1, alg: new Shuffle()},
-        {n: size, speed: 10*1.0, alg: new RadixMSDSort({base: 2})},
-        {n: size, speed: 10*1, alg: new Shuffle()},
-        {n: size, speed: 10*0.42, alg: new RadixLSDSort({base: 10})},
-        {n: size, speed: 10*1, alg: new Shuffle()},
-        {n: size, speed: 10*0.42, alg: new RadixMSDSort({base: 10})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 61.4, alg: new RadixLSDSort({base: 2})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 61.4, alg: new RadixMSDSort({base: 2})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 61.4, alg: new RadixLSDSort({base: 10})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 61.4, alg: new RadixMSDSort({base: 10})},
 
-        // //bubble sorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 4.4, alg: new BubbleSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 3.5, alg: new CocktailSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 4.2, alg: new OddEvenSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.99, alg: new CombSort({shrink: 1.3})},
+        // sorting networks
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 94.8, alg: new BitonicMergeSort({concurrent:false})},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 0.5, alg: new BitonicMergeSort({concurrent:true})},
 
-        // //insertion sorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 2.2, alg: new InsertionSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 2.7, alg: new BinaryInsertionSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 4.5, alg: new GnomeSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.61, alg: new ShellSort({shrink: 2.5})},
+        // bubble sorts
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 294, alg: new BubbleSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 294, alg: new CocktailSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 294, alg: new OddEvenSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 68.8, alg: new CombSort({shrink: 1.3})},
 
-        // //selection sorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 4.7, alg: new SelectionSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 4.6, alg: new MaxSelectionSort()},
-        // // {n: size, speed: 1, alg: new Shuffle()},
-        // // {n: size, speed: 1, alg: new BingoSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 2.4, alg: new DoubleSelectionSort()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 0.43, alg: new HeapSort()},
+        // insertion sorts
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 250, alg: new InsertionSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 250, alg: new BinaryInsertionSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 291, alg: new GnomeSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 44.1, alg: new ShellSort({shrink: 2.5})},
 
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 2.9, alg: new StrandSortV1()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 1.3, alg: new StrandSortV2()},
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 1.5, alg: new CircleSort()},
+        // selection sorts
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 293, alg: new SelectionSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 293, alg: new MaxSelectionSort()},
+        // {n: size/4, speed: 160/4, alg: new Shuffle()},
+        // {n: size/4, speed: 293, alg: new BingoSort()},
+        {n: size/4, speed: 160/4, alg: new Shuffle()},
+        {n: size/4, speed: 293, alg: new DoubleSelectionSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 27.0, alg: new HeapSort()},
 
-        // //joke sorts
-        // {n: size, speed: 1, alg: new Shuffle()},
-        // {n: size, speed: 99, alg: new StoogeSort()},
-        // // {n: size, speed: 1, alg: new Shuffle()},
-        // // {n: size, speed: 1, alg: new BogoSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 707, alg: new StrandSortV1()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 250, alg: new StrandSortV2()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 145, alg: new CircleSort()},
+
+        //joke sorts
+        // {n: size/8, speed: 160/8, alg: new Shuffle()},
+        // {n: size/8, speed: 17519, alg: new StoogeSort()},
+        {n: size, speed: 160, alg: new Shuffle()},
+        {n: size, speed: 1000*1, alg: new BogoSort()},
     ]);
 }
