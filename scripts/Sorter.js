@@ -119,8 +119,9 @@ class Sorter {
     drawInfoList() {
         fill(255);
         noStroke();
+        textFont('Consolas')
         textSize(32);
-        let y = 50;
+        let y = 40;
         for(let i in arguments) {
             if(arguments[i]) {
                 text(arguments[i], 20, y);
