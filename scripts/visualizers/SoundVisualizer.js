@@ -34,6 +34,10 @@ class SoundVisualizer extends Visualizer {
         }
     }
 
+    mapFreq(n) {
+        return Math.pow(map(n, this.min, this.max, 0, 1), 2)*500+150;
+    }
+
     step(iters) {
         let wasDone = this.done; 
 
@@ -53,11 +57,11 @@ class SoundVisualizer extends Visualizer {
             //play each frequency sequentially
             for(let i = 0; i < this.alg.values.length; i += 2) {
                 this.osc1.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[i], this.min, this.max, 110, 440),
+                    this.mapFreq(this.alg.values[i]),
                     this.context.currentTime + i/60/this.alg.values.length
                 );
                 this.osc2.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[i+1], this.min, this.max, 110, 440) + 10, //slight offset of 10 Hz
+                    this.mapFreq(this.alg.values[i+1]) + 10, //slight offset of 10 Hz
                     this.context.currentTime + i/60/this.alg.values.length
                 );
             }
@@ -65,13 +69,13 @@ class SoundVisualizer extends Visualizer {
             if(this.alg.values.length > 0) {
                 //play only the last two frequencies
                 this.osc1.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[this.alg.values.length-2], this.min, this.max, 110, 440),
+                    this.mapFreq(this.alg.values[this.alg.values.length-2]),
                     this.context.currentTime + 1/60
                 );
             }
             if(this.alg.values.length > 1) {
                 this.osc2.frequency.linearRampToValueAtTime(
-                    map(this.alg.values[this.alg.values.length-1], this.min, this.max, 110, 440) + 10,
+                    this.mapFreq(this.alg.values[this.alg.values.length-1]) + 10,
                     this.context.currentTime + 1/60
                 );
             }
