@@ -28,6 +28,8 @@ function setup() {
     algIterator.next();
 }
 
+let totalTime = 0;
+
 //p5js draw function
 function draw() {
     if(vis.started) {
@@ -39,11 +41,14 @@ function draw() {
     }
     
     if(vis.done && !waiting) {
-        console.log(vis.alg.name, vis.alg.visualTime/30000*speed)
+        console.log("Total Time", totalTime += (vis.alg.visualTime)/1000 + 1)
+        if(vis.alg.name != "Shuffling..." && (Math.abs(30000 - vis.alg.visualTime) > 5000 || true))
+            console.log(vis.alg.name, vis.alg.visualTime/30000*speed)
+
         setTimeout(
             () => {
-                algIterator.next();
-                waiting = false;
+                if(algIterator.next())
+                    waiting = false;
             },
             1000
         )
@@ -54,10 +59,10 @@ function draw() {
     vis.draw();
     vis.alg.writeInfo();
 
-    fill(255);
-    noStroke(0);
-    textSize(16);
-    text(Math.floor(frameRate()), 10, 20);
+    // fill(255);
+    // noStroke(0);
+    // textSize(16);
+    // text(Math.floor(frameRate()), 10, 20);
 }
 
 function mousePressed() {
