@@ -6,3 +6,8 @@ body {
     overflow: hidden;
     margin: 0;
 }
+
+#visualizer-div {
+    width: 100vw;
+    height: 100vh;
+}

@@ -20,8 +20,9 @@ function preload() {
 
 //p5js setup function
 function setup() {
-    visCanvas = createCanvas(1920, 1080);
+    visCanvas = createCanvas();
     visCanvas.parent("visualizer-div");
+    visCanvas.id("visualizer-canvas");
 
     loadSequence();
 
@@ -32,6 +33,11 @@ let totalTime = 0;
 
 //p5js draw function
 function draw() {
+    resizeCanvas(
+        document.getElementById("visualizer-div").offsetWidth,
+        document.getElementById("visualizer-div").offsetHeight
+    );
+
     if(vis.started) {
         timer += speed;
         if(timer >= 1){
