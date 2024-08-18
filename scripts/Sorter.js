@@ -117,18 +117,16 @@ class Sorter {
     null values are treated as small gaps between lines.
     */
     drawInfoList() {
-        fill(255);
-        noStroke();
-        textFont('Consolas')
-        textSize(32);
-        let y = 40;
+        let str = "";
+
         for(let i in arguments) {
             if(arguments[i]) {
-                text(arguments[i], 20, y);
-                y += 35;
+                str += `<p>${arguments[i]}</p>`;
             } else {
-                y += 20;
+                str += "<hr />"
             }
         }
+
+        document.getElementById("sorter-info").innerHTML = str;
     }
 }
