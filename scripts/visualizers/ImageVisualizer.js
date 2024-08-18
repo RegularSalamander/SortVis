@@ -55,10 +55,10 @@ class ImageVisualizer extends SoundVisualizer {
 
         for(let i in this.arr) {
             if(flashing && this.alg.accessing.has(parseInt(i))) {
-                this.img.pixels[i*4] = 255;
-                this.img.pixels[i*4 + 1] = 255;
-                this.img.pixels[i*4 + 2] = 255;
-                this.img.pixels[i*4 + 3] = 255;
+                this.img.pixels[i*4] = this.arr[i].r;
+                this.img.pixels[i*4 + 1] = this.arr[i].g;
+                this.img.pixels[i*4 + 2] = this.arr[i].b;
+                this.img.pixels[i*4 + 3] = 225; //slightly transparent
             } else {
                 this.img.pixels[i*4] = this.arr[i].r;
                 this.img.pixels[i*4 + 1] = this.arr[i].g;
@@ -69,6 +69,8 @@ class ImageVisualizer extends SoundVisualizer {
         this.img.updatePixels();
 
         let scl = Math.min(height/this.img.height, width/this.img.width);
+        fill(255);
+        rect((width-scl*this.img.width)*3/4, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
         image(this.img, (width-scl*this.img.width)*3/4, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
     }
 }
