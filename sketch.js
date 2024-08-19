@@ -24,9 +24,7 @@ function setup() {
     visCanvas.parent("visualizer-div");
     visCanvas.id("visualizer-canvas");
 
-    loadSequence();
-
-    algIterator.next();
+    setupVis()
 }
 
 let totalTime = 0;
@@ -64,28 +62,59 @@ function draw() {
 
     vis.draw();
     vis.alg.writeInfo();
-
-    // fill(255);
-    // noStroke(0);
-    // textSize(16);
-    // text(Math.floor(frameRate()), 10, 20);
 }
 
-function mousePressed() {
+const idxFunc = (a) => a.index;
+const luminanceFunc = (a) => - ((0.2126*a.r + 0.7152*a.g + 0.0722*a.b)*50 + Math.random());
+
+function applyImage() {
+    document.getElementById("option-visualizer-type").value = "ImageVisualizer";
+
+    let image = document.getElementById("option-image").files[0];
+    let url = window.URL.createObjectURL(image);
+    img = loadImage(url, () => {
+        setupVis();
+        window.URL.revokeObjectURL(url);
+    });
+}
+
+function setupVis() {
+    if(vis)
+        vis.stopSound();
+
+    //visualizer selection
+    let type = document.getElementById("option-visualizer-type").value;
+    if(type == "BarVisualizer") vis = new BarVisualizer();
+    else if(type == "RainbowBarVisualizer") vis = new RainbowBarVisualizer();
+    else if(type == "GradientBarVisualizer") vis = new GradientBarVisualizer([255, 50, 50], [255, 255, 50], [50, 255, 50]);
+    else if(type == "RainbowCircleVisualizer") vis = new RainbowCircleVisualizer();
+    else if(type == "ScatterVisualizer") vis = new ScatterVisualizer();
+    else if(type == "ImageVisualizer") vis = new ImageVisualizer(img, 1);
+
+    //array size
+    let n = document.getElementById("option-array-size").value;
+    if(type == "ImageVisualizer") vis.makeArray(n, luminanceFunc); //sort images by luminance
+    else vis.makeArray(n, idxFunc); //sort other arrays by index
+
+    vis.useAlgorithm(new Shuffle())
+
+    fullSound = n < 10000; //disable full sound on large arrays
+
+    updateVis();
+}
+
+function updateVis() {
+    speed = document.getElementById("option-speed").value;
+
+    flashing = document.getElementById("option-flashing").checked;
+}
+
+function startSort() {
+    vis.useAlgorithm(new MergeSort());
     vis.setup();
 }
 
-function* algSeries(func, list) {
-    for(let i in list) {
-        if(i == 0 || list[i].n != list[i-1].n) {
-            vis.makeArray(list[i].n, func);
-            vis.done = true;
-            if(i > 0) yield;
-        }
-        vis.useAlgorithm(list[i].alg);
-        speed = list[i].speed;
-
-        
-        yield;
-    }
+function doShuffle() {
+    vis.useAlgorithm(new Shuffle());
+    vis.setup();
 }

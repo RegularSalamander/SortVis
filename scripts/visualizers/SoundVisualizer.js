@@ -21,9 +21,14 @@ class SoundVisualizer extends Visualizer {
             if (document.visibilityState == "visible") {
                 this.gain.gain.setTargetAtTime(0.1, this.context.currentTime, 0.04);
             } else {
-                this.gain.gain.setTargetAtTime(0.00001, this.context.currentTime, 0.04);
+                this.stopSound();
             }
         });
+    }
+
+    stopSound() {
+        if(this.context)
+            this.gain.gain.setTargetAtTime(0.00001, this.context.currentTime, 0.04);
     }
 
     useAlgorithm(alg) {

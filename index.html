@@ -63,12 +63,50 @@
 
         
         <script src="sketch.js"></script>
-        <script src="sequence.js"></script>
+        <!-- <script src="sequence.js"></script> -->
     </head>
+
+
     <body>
         <main>
             <div class="settings-div">
-                <p>Settings div</p>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="option">Visualizer: <select id="option-visualizer-type" onchange="setupVis()">
+                                <option value="BarVisualizer">Bars</option>
+                                <option value="RainbowBarVisualizer">Rainbow Bars</option>
+                                <option value="GradientBarVisualizer">Gradient Bars</option>
+                                <option value="RainbowCircleVisualizer">Rainbow Circle</option>
+                                <option value="ScatterVisualizer">Scatter</option>
+                                <option value="ImageVisualizer">Image</option>
+                            </select> </div>
+                        </td>
+                        <td>
+                            <div class="option">Array Size: <input type="number" value="100" id="option-array-size" onchange="setupVis()"></div>
+                        </td>
+                        <td>
+                            <div class="option">Image: <input type="file" accept="image/*" id="option-image" onchange="applyImage()"></div>
+                        </td>
+                        <td>
+                            <div class="options"><button onclick="startSort()">Start Sort</button></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="option">Flashing: <input type="checkbox" id="option-flashing" onchange="updateVis()" checked ></div>
+                        </td>
+                        <td>
+                            <div class="option">Speed: <input type="number" value="10" id="option-speed" onchange="updateVis()"></div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <div class="options"><button onclick="doShuffle()">Shuffle</button></div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="lower-container">
                 <div class="sorter-div">

@@ -70,7 +70,7 @@ class ImageVisualizer extends SoundVisualizer {
 
         let scl = Math.min(height/this.img.height, width/this.img.width);
         fill(255);
-        rect((width-scl*this.img.width)*3/4, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
-        image(this.img, (width-scl*this.img.width)*3/4, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
+        rect((width-scl*this.img.width)/2, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
+        image(this.img, (width-scl*this.img.width)/2, (height-scl*this.img.height), this.img.width*scl, this.img.height*scl);
     }
 }
